@@ -1,29 +1,44 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - JAM_BITES</title>
+    <title>@ViewData["Title"] - JAM BITES</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/JAM_BITES.styles.css" asp-append-version="true" />
+    <style>
+        /* Estilo personalizado para hacer "JAM BITES" más grueso */
+        .navbar-brand {
+            font-weight: bold;
+            /* Cambia a "bold" para hacerlo más grueso */
+            font-size: 1.5rem;
+            /* Aumenta el tamaño de fuente si es necesario */
+        }
+    </style>
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3"
+            style="background-color: #d62027;">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">JAM_BITES</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand mb-0 h1" asp-area="" asp-controller="Home" asp-action="Index"
+                    style="color: #FFFFFF;">JAM BITES</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home"
+                                asp-action="Index">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home"
+                                asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -36,15 +51,33 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - JAM_BITES - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <br>
+    <footer class="border-top footer text-muted"
+        style="background-color: #d62027; text-align: left; font-weight: bold; font-size: 1em; margin-top: auto; padding: 20px;">
+        <div class="container d-flex justify-content-between align-items-center" style="color: #FFFFFF;">
+            <div>
+                <h3 style="font-weight: 900; font-size: 2.5em;">JAM BITES</h3> <!-- Aumentar el tamaño de la fuente -->
+            </div>
+            <div class="payment-options">
+                <h4 style="font-size: 1.5em; font-weight: bold;">Formas de Pago</h4>
+                <!-- Hacer "Formas de Pago" más grueso -->
+                <img src="https://kcuscotours.com/wp-content/uploads/2020/01/pagos-visa.png" alt="Visa"
+                    style="width: 250px; height: auto;"> <!-- Aumentar el tamaño de la imagen -->
+            </div>
+        </div>
+        <br>
+        <div class="container" style="text-align: center;">
+            &copy; 2024 - Todos los derechos reservados.
         </div>
     </footer>
+
+
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
