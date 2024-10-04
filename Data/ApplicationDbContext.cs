@@ -10,5 +10,7 @@ public class ApplicationDbContext : IdentityDbContext
     {
     }
 
-    public DbSet<JAM_BITES.Models.Contacto> DataContacto {get; set; }
+    public DbSet<JAM_BITES.Models.Contacto> DataContacto { get; set; }
+    public DbSet<JAM_BITES.Models.Cuenta> DataCuenta { get; set; }
+
 }

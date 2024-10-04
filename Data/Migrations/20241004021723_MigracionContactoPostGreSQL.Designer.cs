@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JAM_BITES.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241003205738_MigracionContactoPostGreSQL")]
+    [Migration("20241004021723_MigracionContactoPostGreSQL")]
     partial class MigracionContactoPostGreSQL
     {
         /// <inheritdoc />
@@ -47,7 +47,26 @@ namespace JAM_BITES.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DataContacto");
+                    b.ToTable("t-contacto");
+                });
+
+            modelBuilder.Entity("JAM_BITES.Models.Cuenta", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("t-cuenta");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

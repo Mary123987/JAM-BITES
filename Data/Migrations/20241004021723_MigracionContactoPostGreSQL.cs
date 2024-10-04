@@ -52,7 +52,7 @@ namespace JAM_BITES.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DataContacto",
+                name: "t-contacto",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -64,7 +64,21 @@ namespace JAM_BITES.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DataContacto", x => x.Id);
+                    table.PrimaryKey("PK_t-contacto", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "t-cuenta",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    Password = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_t-cuenta", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -230,7 +244,10 @@ namespace JAM_BITES.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "DataContacto");
+                name: "t-contacto");
+
+            migrationBuilder.DropTable(
+                name: "t-cuenta");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

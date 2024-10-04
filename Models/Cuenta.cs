@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace JAM_BITES.Models
 {
      [Table("t-cuenta")]
-    public class CrearCuenta
+    public class Cuenta
     {
     
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]   

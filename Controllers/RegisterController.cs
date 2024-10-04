@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using JAM_BITES.Data;
+using JAM_BITES.Models;
+using JAM_BITES.ViewModel;
 
 namespace JAM_BITES.Controllers
 {
@@ -12,37 +15,49 @@ namespace JAM_BITES.Controllers
     public class RegisterController : Controller
     {
         private readonly ILogger<RegisterController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public RegisterController(ILogger<RegisterController> logger)
+        public RegisterController(ILogger<RegisterController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var miscuenta = from o in _context.DataCuenta select o;
+            _logger.LogDebug("cuenta {miscuenta}", miscuenta);
+            var viewModel = new CuentaViewModel
+            {
+                FormCuenta = new Cuenta(),
+                ListCuenta = miscuenta
+            };
+            _logger.LogDebug("viewModel {viewModel}", viewModel);
+
+            return View(viewModel);
         }
 
-         [HttpPost]
-        public IActionResult CrearCuenta(string email, string password)
+        [HttpPost]
+        public IActionResult CrearCuenta(CuentaViewModel viewModel)
         {
-            // Aquí deberías implementar la lógica para registrar al usuario en tu base de datos
-            // Por ejemplo: comprobar si el correo ya existe y luego guardarlo
-
-            // Simulación de un registro exitoso
-            if (email != null && password != null)
+            var cuenta = new Cuenta
             {
-                // Guardar en la base de datos (pseudocódigo)
-                // userRepository.Add(new User { Email = email, Password = password });
+                Email = viewModel.FormCuenta.Email,
+                Password = viewModel.FormCuenta.Password
+            };
 
-                // Redirigir a la página de inicio de sesión con un mensaje de éxito
-                ViewBag.SuccessMessage = "Registro exitoso. Ahora puedes iniciar sesión.";
-                return RedirectToAction("Index", "IniciarSesion");
+            _context.Add(cuenta);
+            _context.SaveChanges();
+
+            if (viewModel.FormCuenta == null)
+            {
+                _logger.LogError("FormCuenta es nulo");
+                ViewBag.ErrorMessage = "Por favor, completa todos los campos.";
+                return View("Index", viewModel); 
             }
 
-           
-            ViewBag.ErrorMessage = "Por favor, completa todos los campos.";
-            return View();
+            ViewBag.SuccessMessage = "Registro exitoso. Ahora puedes iniciar sesión.";
+            return View("Index", viewModel);
         }
 
 
