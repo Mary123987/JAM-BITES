@@ -9,4 +9,8 @@ public class ApplicationDbContext : IdentityDbContext
         : base(options)
     {
     }
+
+    public DbSet<JAM_BITES.Models.Contacto> DataContacto { get; set; }
+    public DbSet<JAM_BITES.Models.Cuenta> DataCuenta { get; set; }
+
 }

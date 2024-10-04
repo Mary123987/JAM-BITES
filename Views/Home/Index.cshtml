@@ -2,7 +2,161 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<body>
+
+    <div class="container">
+        <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://elcomercio.pe/resizer/PvKpQPasy7WukPhl0HmMlUqkH6A=/980x528/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/MA6D4G4ACVF5XPERTVLLGCCJ34.png"
+                        class="d-block w-100" alt="Burger 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://estaticos-cdn.prensaiberica.es/clip/d6b828f0-48eb-4069-8aff-3dc01ae03f3f_16-9-aspect-ratio_default_0.jpg"
+                        class="d-block w-100" alt="Burger 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://espanol.kingsford.com/wp-content/uploads/2017/02/KFD_SpicyBBQBaconRanchBurger35382_WEB.jpg"
+                        class="d-block w-100" alt="Burger 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <br>
+    <section class="online-promos">
+        <h2>Promociones Online</h2>
+        <div class="online-promos-container">
+            <div class="promo-item">
+                <img src="https://img.freepik.com/fotos-premium/trio-hamburguesas-queso-tocino-lechuga-fotografia-comida-primer-plano_616001-24685.jpg"
+                    alt="Burger 1">
+                <h3>Trio Compartir</h3>
+                <span>S/ 29.99</span>
+            </div>
+            <div class="promo-item">
+                <img src="https://img.freepik.com/fotos-premium/plato-nuggets-pollo-papas-fritas-ketchup-tabla-cortar_106006-11547.jpg"
+                    alt="Burger 2">
+                <h3>Nuggets</h3>
+                <span>S/ 14.99</span>
+            </div>
+            <div class="promo-item">
+                <img src="https://image.made-in-china.com/2f0j00mcLlPVGqrNgO/1000-Pieces-of-Disposable-Sundae-Cup-Commercial-Thickened-Ice-Cream-Ice-Cream-Cup-Milkshake-Plastic-with-Lid.webp"
+                    alt="Burger 3">
+                <h3>Helados de Locura</h3>
+                <span>S/ 25.99</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="online-promos">
+        <div class="online-promos-container">
+            <div class="promo-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3FHdOofotwmDZ-sVru39CBkN5oVVmnwGrJw&s"
+                    alt="Burger 4">
+                <h3>Pack de Gaseosas</h3>
+                <span>S/ 17.99</span>
+            </div>
+            <div class="promo-item">
+                <img src="https://www.burgerking.pe/Multimedia/productos/detalle/El_Rey_STACKER_Para_4_v1.PNG"
+                    alt="Burger 5">
+                <h3>Comelon de Locura</h3>
+                <span>S/ 45.99</span>
+            </div>
+            <div class="promo-item">
+                <img src="https://rockstar.com.py/wordpress/wp-content/uploads/2016/02/French-Fries-random-35742326-1600-1455.jpg"
+                    alt="Burger 5">
+                <h3>Papa fest</h3>
+                <span>S/ 19.99</span>
+            </div>
+        </div>
+    </section>
+</body>
+
+<style>
+    * body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+    }
+
+    .carousel-inner {
+        max-height: 500px;
+        /* Altura fija para las imágenes */
+        overflow: hidden;
+        /* Asegura que no haya desbordamiento */
+    }
+
+    .carousel-inner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Hace que las imágenes se ajusten al tamaño del contenedor sin distorsionarse */
+    }
+
+    .online-promos h2 {
+        font-weight: bold;
+        /* O usa un valor numérico, como 700 */
+        font-size: 2em;
+        /* Si quieres ajustar el tamaño también */
+        text-align: center;
+        /* Para centrar el texto si lo deseas */
+    }
+
+    .online-promos-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .promo-item {
+        width: 200px;
+        /* Tamaño del cuadro */
+        height: 250px;
+        /* Alto del cuadro */
+        text-align: center;
+        overflow: hidden;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #f8f8f8;
+    }
+
+    .promo-item img {
+        width: 100%;
+        height: 150px;
+        /* Define la altura para la imagen */
+        object-fit: cover;
+        /* La imagen cubre el cuadro proporcionalmente */
+        border-radius: 8px;
+        /* Redondeo de la imagen */
+    }
+
+    .promo-item h3 {
+        margin: 10px 0;
+        font-size: 18px;
+    }
+
+    .promo-item span {
+        color: #d62027;
+        font-weight: bold;
+    }
+</style>
+
+</html>

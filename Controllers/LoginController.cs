@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace JAM_BITES.Controllers
 {
-    [Route("[controller]")]
     public class LoginController : Controller
     {
         private readonly ILogger<LoginController> _logger;
@@ -19,12 +18,7 @@ namespace JAM_BITES.Controllers
         }
 
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Crear()
+        public IActionResult IniciarSesion()
         {
             return View();
         }
@@ -33,14 +27,14 @@ namespace JAM_BITES.Controllers
         [HttpPost]
         public IActionResult Ingresar(string email, string password)
         {
-
             if (email == "admin@ejemplo.com" && password == "123456")
             {
-                return RedirectToAction("Dashboard");  // Nombre del MENÚ
+
+                return RedirectToAction("Index", "Home");
             }
 
             ViewBag.ErrorMessage = "Correo o contraseña incorrectos";
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

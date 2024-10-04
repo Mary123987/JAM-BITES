@@ -1,3 +1,5 @@
+@model JAM_BITES.ViewModel.CuentaViewModel 
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -140,9 +142,9 @@ form input {
         </div>
         <p>¡Completa el formulario para crear tu cuenta!</p>
         
-        <form asp-controller="RegisterController" asp-action="CrearCuenta" method="post">
-            <input type="email" name="email" placeholder="Correo Electrónico" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
+        <form asp-controller="Register" asp-action="CrearCuenta" method="post">
+            <input asp-for="FormCuenta.Email" type="email" placeholder="Correo Electrónico" required>
+            <input asp-for="FormCuenta.Password" type="password" placeholder="Contraseña" required>
             <button type="submit" class="btn-login">Crear Cuenta</button>
         </form>
         
