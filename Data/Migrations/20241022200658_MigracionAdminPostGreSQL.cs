@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JAM_BITES.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class MigracionContactoPostGreSQL : Migration
+    public partial class MigracionAdminPostGreSQL : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -79,6 +79,20 @@ namespace JAM_BITES.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_t-cuenta", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "t-usuario",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    User = table.Column<string>(type: "text", nullable: true),
+                    Password = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_t-usuario", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -248,6 +262,9 @@ namespace JAM_BITES.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "t-cuenta");
+
+            migrationBuilder.DropTable(
+                name: "t-usuario");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

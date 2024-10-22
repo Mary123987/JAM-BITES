@@ -1,0 +1,265 @@
+@{
+    ViewData["Title"] = "Panel Administrador";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --rojo-primario: #dc2626;
+            --rojo-oscuro: #b91c1c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .barra-nav {
+            background-color: var(--rojo-primario);
+            padding: 1rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo-marca {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .menu-nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contenedor-estadisticas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+            margin: 1rem;
+        }
+
+        .tarjeta-estadistica {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tarjeta-encabezado {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .tarjeta-titulo {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .tarjeta-valor {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .tarjeta-icono {
+            color: var(--rojo-primario);
+            font-size: 1.5rem;
+        }
+
+        .seccion-contenido {
+            background: white;
+            margin: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .seccion-encabezado {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .seccion-titulo {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .contenedor-tabla {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #f9fafb;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #6b7280;
+        }
+
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .estado {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .estado-completado {
+            background-color: #def7ec;
+            color: #046c4e;
+        }
+
+        .estado-preparando {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .menu-acciones {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .boton {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+        }
+
+        .boton-primario {
+            background-color: var(--rojo-primario);
+            color: white;
+        }
+
+        .boton-primario:hover {
+            background-color: var(--rojo-oscuro);
+        }
+    </style>
+</head>
+<body>
+    <nav class="barra-nav">
+        <div class="logo-marca">
+            JAM BITES Administración
+        </div>
+        <div class="menu-nav">
+            <i class="fas fa-bell"></i>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fas fa-user-circle"></i>
+                <span>Administrador</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="contenedor-estadisticas">
+        <div class="tarjeta-estadistica">
+            <div class="tarjeta-encabezado">
+                <div>
+                    <div class="tarjeta-titulo">Pedidos Totales</div>
+                    <div class="tarjeta-valor">1,254</div>
+                </div>
+                <i class="fas fa-shopping-bag tarjeta-icono"></i>
+            </div>
+        </div>
+        <div class="tarjeta-estadistica">
+            <div class="tarjeta-encabezado">
+                <div>
+                    <div class="tarjeta-titulo">Clientes Activos</div>
+                    <div class="tarjeta-valor">847</div>
+                </div>
+                <i class="fas fa-users tarjeta-icono"></i>
+            </div>
+        </div>
+        <div class="tarjeta-estadistica">
+            <div class="tarjeta-encabezado">
+                <div>
+                    <div class="tarjeta-titulo">Productos en Menú</div>
+                    <div class="tarjeta-valor">36</div>
+                </div>
+                <i class="fas fa-hamburger tarjeta-icono"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="seccion-contenido">
+        <div class="seccion-encabezado">
+            <h2 class="seccion-titulo">Pedidos Recientes</h2>
+        </div>
+        <div class="contenedor-tabla">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Número de Pedido</th>
+                        <th>Cliente</th>
+                        <th>Productos</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#12345</td>
+                        <td>Juan Pérez</td>
+                        <td>2x Hamburguesa Clásica, 1x Papas</td>
+                        <td>$25.98</td>
+                        <td>
+                            <span class="estado estado-completado">Completado</span>
+                        </td>
+                        <td>
+                            <div class="menu-acciones">
+                                <button class="boton boton-primario">Ver Detalles</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#12344</td>
+                        <td>María González</td>
+                        <td>1x Hamburguesa de Pollo, 1x Refresco</td>
+                        <td>$18.99</td>
+                        <td>
+                            <span class="estado estado-preparando">En Preparación</span>
+                        </td>
+                        <td>
+                            <div class="menu-acciones">
+                                <button class="boton boton-primario">Ver Detalles</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</body>
+</html>
