@@ -148,7 +148,7 @@ form input {
             <button type="submit" class="btn-login">Crear Cuenta</button>
         </form>
         
-        <form action="@Url.Action("IniciarSesion","Login")" method="get"><button>Ya tengo una cuenta</button></form>
+        <form action="@Url.Action("Index","Login")" method="get"><button>Ya tengo una cuenta</button></form>
         
         @if (ViewBag.ErrorMessage != null)
         {

@@ -22,7 +22,7 @@ namespace JAM_BITES.Controllers
         }
 
 
-        public IActionResult IniciarSesion()
+        public IActionResult Index()
         {
             return View();
         }
@@ -44,7 +44,7 @@ namespace JAM_BITES.Controllers
             {
                 ViewBag.Error = "Correo o contraseña incorrectos";
             }
-            return View("IniciarSesion");
+            return View("Index");
         }
 
 
