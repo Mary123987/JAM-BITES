@@ -1,5 +1,6 @@
-@model JAM_BITES.ViewModel.ContactoViewModel 
-@{ ViewData["Title"] = "Contacto";
+@model JAM_BITES.ViewModel.ContactoViewModel
+@{
+  ViewData["Title"] = "Contacto";
 }
 
 <style>
@@ -16,6 +17,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
   }
+
   .text-center {
     text-align: center;
   }
@@ -50,6 +52,7 @@
     font-size: 2em;
     color: #d62027;
   }
+
   .btn {
     font-weight: bold;
     border-color: #d62027;
@@ -62,43 +65,28 @@
     <div class="col-md-6">
       <form asp-controller="Contacto" asp-action="Enviar" method="post">
         <div class="form-group">
-          <label asp-for="FormContacto.Nombre" class="control-label"
-            >Nombre:</label>
+          <label asp-for="FormContacto.Nombre" class="control-label">Nombre:</label>
           <input asp-for="FormContacto.Nombre" class="form-control" />
         </div>
         <br />
         <div class="form-group">
-          <label asp-for="FormContacto.Email" class="control-label"
-            >Correo:</label>
-          <input
-            asp-for="FormContacto.Email"
-            class="form-control"
-            type="email"
-          />
+          <label asp-for="FormContacto.Email" class="control-label">Correo:</label>
+          <input asp-for="FormContacto.Email" class="form-control" type="email" />
         </div>
         <br />
         <div class="form-group">
-          <label asp-for="FormContacto.Telefono" class="control-label"
-            >Telefono:</label>
-          <input asp-for="FormContacto.Telefono" class="form-control" />
+          <label asp-for="FormContacto.Telefono" class="control-label">Telefono:</label>
+          <input asp-for="FormContacto.Telefono" class="form-control" type="tel" pattern="[0-9]{9}"/>
         </div>
         <br />
         <div class="form-group">
-          <label asp-for="FormContacto.Mensaje" class="control-label"
-            >Mensaje:</label>
-          <textarea
-            asp-for="FormContacto.Mensaje"
-            class="form-control"
-          ></textarea>
+          <label asp-for="FormContacto.Mensaje" class="control-label">Mensaje:</label>
+          <textarea asp-for="FormContacto.Mensaje" class="form-control"></textarea>
         </div>
         <br />
 
         <div class="form-group text-center">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            style="background-color: #d62027; color: white"
-          >
+          <button type="submit" class="btn btn-primary" style="background-color: #d62027; color: white">
             Enviar
           </button>
         </div>

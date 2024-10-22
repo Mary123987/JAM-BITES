@@ -1,8 +1,10 @@
+@model JAM_BITES.Models.Cuenta
+
 @{
     ViewData["Title"] = "Home Page";
 }
 <style>
-   * {
+    * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -30,7 +32,8 @@
         border: 1px solid #dee2e6;
         border-radius: 15px;
         padding: 40px;
-        width: 500px; /* Contenedor más ancho */
+        width: 500px;
+        /* Contenedor más ancho */
         text-align: center;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -42,7 +45,8 @@
     }
 
     .title-section {
-        background-color: #dc3545; /* Rojo oscuro */
+        background-color: #dc3545;
+        /* Rojo oscuro */
         padding: 20px;
         color: #ffffff;
         border-radius: 10px 10px 0 0;
@@ -70,7 +74,8 @@
     }
 
     .btn-login {
-        background-color: #eba728; /* Rojo */
+        background-color: #eba728;
+        /* Rojo */
         color: white;
         padding: 15px;
         width: 100%;
@@ -88,7 +93,8 @@
 
     .create-account {
         display: block;
-        color: #007bff; /* Azul */
+        color: #007bff;
+        /* Azul */
         margin: 20px 0;
         text-decoration: none;
         font-weight: bold;
@@ -137,19 +143,31 @@
             <h2>Ingresa a tu cuenta JAM</h2>
         </div>
         <p>¡Si tienes una cuenta con nosotros, ingresa tus datos para comenzar!</p>
-        
-        <form asp-controller="Login" asp-action="Ingresar"  method="post">
-            <input type="email" placeholder="Correo Electrónico" required>
-            <input type="password" placeholder="Contraseña" required>
-            <button type="submit" class="btn-login">Ingresar</button>
+
+        <form asp-controller="Login" asp-action="Ingresar" method="post">
+            <div class="form-group mb-3">
+                <input asp-for="Email" class="form-control" placeholder="Email" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <input asp-for="Password" type="password" class="form-control" placeholder="Contraseña" required />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+            <button type="submit" class="btn btn-primary btn-block w-100">Ingresar</button>
         </form>
-        
+
         <form action="@Url.Action("Index","Register")" method="get">
-        <button>Crear cuenta</button>
+            <button>Crear cuenta</button>
         </form>
 
         <p class="social-login-text">Inicia también a través de:</p>
-        
+
         <div class="social-buttons">
             <button class="btn-google">Inicia con Google</button>
             <button class="btn-facebook">Inicia con Facebook</button>
