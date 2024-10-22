@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using JAM_BITES.Models;
+using JAM_BITES.ViewModel;
 using JAM_BITES.Data;
+
 
 namespace JAM_BITES.Controllers
 {
@@ -18,7 +20,7 @@ namespace JAM_BITES.Controllers
         public AdminController(ILogger<AdminController> logger, ApplicationDbContext context)
         {
             _logger = logger;
-            _context = context;  
+            _context = context;
         }
 
 
@@ -38,7 +40,7 @@ namespace JAM_BITES.Controllers
             var user = _context.DataUsuario.FirstOrDefault(x => x.User == model.User && x.Password == model.Password);
             if (user != null)
             {
-                return RedirectToAction("Panel", "Admin"); 
+                return RedirectToAction("Panel", "Admin");
             }
             else
             {
@@ -54,9 +56,31 @@ namespace JAM_BITES.Controllers
 
         public IActionResult ListCuenta()
         {
-            return View();
+            var miscuenta = from o in _context.DataCuenta select o;
+            _logger.LogDebug("cuenta {miscuenta}", miscuenta);
+            var viewModel = new CuentaViewModel
+            {
+                FormCuenta = new Cuenta(),
+                ListCuenta = miscuenta
+            };
+            _logger.LogDebug("viewModel {viewModel}", viewModel);
+
+            return View(viewModel);
         }
 
+        public IActionResult ListContacto()
+        {
+            var miscontacto = from o in _context.DataContacto select o;
+            _logger.LogDebug("contacto {miscontacto}", miscontacto);
+            var viewModel = new ContactoViewModel
+            {
+                FormContacto = new Contacto(),
+                ListContacto = miscontacto
+            };
+            _logger.LogDebug("viewModel {viewModel}", viewModel);
+
+            return View(viewModel);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
