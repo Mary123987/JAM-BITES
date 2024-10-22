@@ -44,7 +44,7 @@ namespace JAM_BITES.Controllers
             {
                 ViewBag.Error = "Usuario o contraseña incorrectos";
             }
-            return View("Login");
+            return View("Index");
         }
 
         public IActionResult Panel()
