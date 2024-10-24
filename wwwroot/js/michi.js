@@ -24,7 +24,7 @@ function seleccionar(celda) {
     const [i, j] = obtenerPosicionDesdeId(id);
     if (grilla[i][j] != "" || juegoTerminado) return;
 
-    celda.innerHTML = '<img src="~/img/x.png" alt="X">';
+    celda.innerHTML = '<img src="/img/x.png" alt="X">';
     grilla[i][j] = "X";
     turno++;
 
@@ -66,7 +66,7 @@ function turnoComputadora() {
     }
 
     let celda = document.getElementById(i + "" + j);
-    celda.innerHTML = '<img src="~/img/o.png" alt="O">';
+    celda.innerHTML = '<img src="/img/o.png" alt="O">';
     grilla[i][j] = "O";
     turno++;
 
