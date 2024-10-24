@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #fff;
+    color: #333;
+}
+
+.menu {
+    background-color: #ffa400;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.promo {
+    text-align: center;
+    margin: 20px auto;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px; /* Ancho máximo reducido */
+}
+
+.promo h1 {
+    font-size: 28px;
+    color: #c40000;
+    margin-bottom: 15px;
+}
+
+.promo p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.play-button {
+    background-color: #d1e231;
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.how-it-works, .how-to-play {
+    text-align: center;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #fff8e1;
+    border-radius: 10px;
+    max-width: 600px; /* Ancho máximo más pequeño */
+}
+
+.how-it-works h2, .how-to-play h2 {
+    color: #c40000;
+    margin-bottom: 10px;
+}
+
+.how-it-works p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.how-it-works a {
+    color: #ff9000;
+    text-decoration: none;
+}
+
+.how-to-play ol {
+    text-align: left;
+    margin: 0 auto;
+    max-width: 550px; /* Ancho ajustado */
+    font-size: 16px;
+    padding-left: 20px; /* Alineación de los elementos de la lista */
+}
+
+.how-to-play li {
+    margin-bottom: 8px; /* Reduce el espacio entre los elementos de la lista */
+}

@@ -9,101 +9,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JAM BITES - Panel Administrativo</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/Panel.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="~/css/Panel.css" />
 </head>
 
 <body>
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
 
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h2>JAM BITES</h2>
+            </div>
 
-    <div class="contenedor-estadisticas">
-        <div class="tarjeta-estadistica">
-            <div class="tarjeta-encabezado">
-                <div>
-                    <div class="tarjeta-titulo">Pedidos Totales</div>
-                    <div class="tarjeta-valor">1,254</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="~/Admin/Panel" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        <span>Panel Inicial</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Admin/ListPedidos" class="nav-link">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Pedidos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Admin/ListMenu" class="nav-link">
+                        <i class="fas fa-hamburger"></i>
+                        <span>Menú</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Admin/ListCuenta" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <span>Clientes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Admin/ListContacto" class="nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Contactos</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-details">
+                        <span class="mb-0" href="~/Admin/Index">Salir </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
                 </div>
-                <i class="fas fa-shopping-bag tarjeta-icono"></i>
             </div>
-        </div>
-        <div class="tarjeta-estadistica">
-            <div class="tarjeta-encabezado">
-                <div>
-                    <div class="tarjeta-titulo">Clientes Activos</div>
-                    <div class="tarjeta-valor">847</div>
+        </nav>
+
+        <!-- Contenido Principal -->
+        <div id="content" class="content">
+            <div class="contenedor-estadisticas">
+                <div class="tarjeta-estadistica">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <div class="tarjeta-titulo">Pedidos Totales</div>
+                            <div class="tarjeta-valor">1,254</div>
+                        </div>
+                        <i class="fas fa-shopping-bag tarjeta-icono"></i>
+                    </div>
                 </div>
-                <i class="fas fa-users tarjeta-icono"></i>
+                <div class="tarjeta-estadistica">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <div class="tarjeta-titulo">Clientes Activos</div>
+                            <div class="tarjeta-valor">847</div>
+                        </div>
+                        <i class="fas fa-users tarjeta-icono"></i>
+                    </div>
+                </div>
+                <div class="tarjeta-estadistica">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <div class="tarjeta-titulo">Productos en Menú</div>
+                            <div class="tarjeta-valor">36</div>
+                        </div>
+                        <i class="fas fa-hamburger tarjeta-icono"></i>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="tarjeta-estadistica">
-            <div class="tarjeta-encabezado">
-                <div>
-                    <div class="tarjeta-titulo">Productos en Menú</div>
-                    <div class="tarjeta-valor">36</div>
+
+            <div class="seccion-contenido">
+                <div class="seccion-encabezado">
+                    <h2 class="seccion-titulo">Pedidos Recientes</h2>
                 </div>
-                <i class="fas fa-hamburger tarjeta-icono"></i>
+                <div class="contenedor-tabla">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Número de Pedido</th>
+                                <th>Cliente</th>
+                                <th>Productos</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#12345</td>
+                                <td>Juan Pérez</td>
+                                <td>2x Hamburguesa Clásica, 1x Papas</td>
+                                <td>$25.98</td>
+                                <td>
+                                    <span class="estado estado-completado">Completado</span>
+                                </td>
+                                <td>
+                                    <div class="menu-acciones">
+                                        <button class="boton boton-primario">Ver Detalles</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#12344</td>
+                                <td>María González</td>
+                                <td>1x Hamburguesa de Pollo, 1x Refresco</td>
+                                <td>$18.99</td>
+                                <td>
+                                    <span class="estado estado-preparando">En Preparación</span>
+                                </td>
+                                <td>
+                                    <div class="menu-acciones">
+                                        <button class="boton boton-primario">Ver Detalles</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="seccion-contenido">
-        <div class="seccion-encabezado">
-            <h2 class="seccion-titulo">Pedidos Recientes</h2>
-        </div>
-        <div class="contenedor-tabla">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Número de Pedido</th>
-                        <th>Cliente</th>
-                        <th>Productos</th>
-                        <th>Total</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>#12345</td>
-                        <td>Juan Pérez</td>
-                        <td>2x Hamburguesa Clásica, 1x Papas</td>
-                        <td>$25.98</td>
-                        <td>
-                            <span class="estado estado-completado">Completado</span>
-                        </td>
-                        <td>
-                            <div class="menu-acciones">
-                                <button class="boton boton-primario">Ver Detalles</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>#12344</td>
-                        <td>María González</td>
-                        <td>1x Hamburguesa de Pollo, 1x Refresco</td>
-                        <td>$18.99</td>
-                        <td>
-                            <span class="estado estado-preparando">En Preparación</span>
-                        </td>
-                        <td>
-                            <div class="menu-acciones">
-                                <button class="boton boton-primario">Ver Detalles</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('sidebarToggle').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('content').classList.toggle('active');
+        });
+    </script>
 </body>
 
 </html>
