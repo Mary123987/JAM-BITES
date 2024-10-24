@@ -27,6 +27,11 @@ namespace JAM_BITES.Controllers
             return View();
         }
 
+        public IActionResult Condiciones()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

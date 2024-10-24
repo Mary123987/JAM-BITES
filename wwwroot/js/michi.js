@@ -66,7 +66,7 @@ function turnoComputadora() {
     }
 
     let celda = document.getElementById(i + "" + j);
-    celda.innerHTML = '<img src="/workspaces/JAM-BITES/wwwroot/img/o.png" alt="O">';
+    celda.innerHTML = '<img src="~/img/o.png" alt="O">';
     grilla[i][j] = "O";
     turno++;
 
