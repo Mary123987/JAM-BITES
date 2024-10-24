@@ -1,74 +1,96 @@
+@model IEnumerable<JAM_BITES.Models.Producto>
 @{
     ViewData["Title"] = "Catalogo";
 }
 
-<!-- Estilos en línea para personalizar el catálogo -->
-<div class="catalogo-container" style="background-color: #f9f9f9; padding: 50px; font-family: Arial, sans-serif; min-height: 80vh;">
-    <h1 style="color: #d32f2f; text-align: center; font-size: 2.5em; font-weight: bold;">Nuestro Menú</h1>
-    
-    <div class="catalogo-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 50px;">
-        
-        <!-- Categoría: Hamburguesas -->
-        <a href="/hamburguesas" class="categoria-link" style="text-decoration: none;">
-            <div class="categoria" style="background-color: #fff; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; border-top: 5px solid #d32f2f; transition: transform 0.3s ease; cursor: pointer;">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmKXuRtGONyayr1LrJjw9BJYEkeW_gnWL4tQ&s" alt="Hamburguesas" style="width: 100%; border-radius: 15px 15px 0 0;">
-                <div class="categoria-info" style="padding: 20px;">
-                    <h2 style="color: #d32f2f; font-weight: bold; font-size: 1.6em;">Hamburguesas</h2>
-                    <p style="color: #616161; font-size: 1.1em;">Deliciosas hamburguesas con ingredientes frescos y sabor irresistible.</p>
-                </div>
-            </div>
-        </a>
+<div class="container">
+  <h1>@ViewData["Title"]</h1>
 
-        <!-- Categoría: Combos -->
-        <a href="/combos" class="categoria-link" style="text-decoration: none;">
-            <div class="categoria" style="background-color: #fff; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; border-top: 5px solid #d32f2f; transition: transform 0.3s ease; cursor: pointer;">
-                <img src="https://file.adomicil.io/carlsjr-victoria.adomicil.io/_files/images/product/lanzamientos08classiccarlcombo-0332105789488231.jpg" alt="Combos" style="width: 100%; border-radius: 15px 15px 0 0;">
-                <div class="categoria-info" style="padding: 20px;">
-                    <h2 style="color: #d32f2f; font-weight: bold; font-size: 1.6em;">Combos</h2>
-                    <p style="color: #616161; font-size: 1.1em;">¡Combina tus favoritos! Hamburguesa, papas y bebida a un precio especial.</p>
-                </div>
-            </div>
-        </a>
-
-        <!-- Categoría: Complementos -->
-        <a href="/complementos" class="categoria-link" style="text-decoration: none;">
-            <div class="categoria" style="background-color: #fff; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; border-top: 5px solid #d32f2f; transition: transform 0.3s ease; cursor: pointer;">
-                <img src="https://tn.com.ar/resizer/v2/venden-el-paquete-de-400-gramos-de-papas-fritas-a-1-cuando-y-donde-comprar-foto-adobestock-OB7423HH5RA2LIF4FCH774RTYA.png?auth=9a1a823c0fa67c44981b5462df812522123834693b5d57a864dcbde69af2aa40&width=1440" alt="Complementos" style="width: 100%; border-radius: 15px 15px 0 0;">
-                <div class="categoria-info" style="padding: 20px;">
-                    <h2 style="color: #d32f2f; font-weight: bold; font-size: 1.6em;">Complementos</h2>
-                    <p style="color: #616161; font-size: 1.1em;">Papas fritas, aros de cebolla y mucho más para acompañar tu pedido.</p>
-                </div>
-            </div>
-        </a>
-
-        <!-- Categoría: Bebidas -->
-        <a href="/bebidas" class="categoria-link" style="text-decoration: none;">
-            <div class="categoria" style="background-color: #fff; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; border-top: 5px solid #d32f2f; transition: transform 0.3s ease; cursor: pointer;">
-                <img src="https://vitacheckup.com.br/wp-content/uploads/2019/10/Consumo-de-bebidas-adocicadas-esta-ligado-ao-aumento-de-doencas-cardiacas.jpeg" alt="Bebidas" style="width: 100%; border-radius: 15px 15px 0 0;">
-                <div class="categoria-info" style="padding: 20px;">
-                    <h2 style="color: #d32f2f; font-weight: bold; font-size: 1.6em;">Bebidas</h2>
-                    <p style="color: #616161; font-size: 1.1em;">Refresca tu comida con nuestras bebidas gaseosas y jugos.</p>
-                </div>
-            </div>
-        </a>
-        
+  <!-- Filtros -->
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <form asp-action="PorCategoria" method="get" class="mb-3">
+        <label class="form-label">Filtrar por Categoría:</label>
+        <select name="categoriaId" class="form-select" onchange="this.form.submit()">
+          <option value="">Todas las categorías</option>
+          @foreach (var categoria in ViewBag.Categorias ?? new List<Categoria>())
+                    {
+                <option value="@categoria.Id">@categoria.Nombre</option>
+                    }
+        </select>
+      </form>
     </div>
+
+    <div class="col-md-3">
+      <form asp-action="PorPrecio" method="get" class="mb-3">
+        <label class="form-label">Rango de Precio:</label>
+        <div class="input-group">
+          <input type="number" name="precioMin" class="form-control" placeholder="Mín">
+          <input type="number" name="precioMax" class="form-control" placeholder="Máx">
+          <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-md-3">
+      <form asp-action="Buscar" method="get" class="mb-3">
+        <label class="form-label">Buscar:</label>
+        <div class="input-group">
+          <input type="text" name="termino" class="form-control" placeholder="Buscar productos...">
+          <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Mostrar filtros activos -->
+    @if (ViewData["CategoriaActual"] != null)
+    {
+        <div class="alert alert-info">
+          Mostrando productos de la categoría: @ViewData["CategoriaActual"]
+          <a asp-action="Index" class="float-end">Quitar filtro</a>
+        </div>
+    }
+    @if (ViewData["RangoPrecio"] != null)
+    {
+        <div class="alert alert-info">
+            @ViewData["RangoPrecio"]
+          <a asp-action="Index" class="float-end">Quitar filtro</a>
+        </div>
+    }
+    @if (ViewData["TerminoBusqueda"] != null)
+    {
+        <div class="alert alert-info">
+          Resultados para: @ViewData["TerminoBusqueda"]
+          <a asp-action="Index" class="float-end">Quitar filtro</a>
+        </div>
+    }
+
+  <!-- Grid de productos -->
+  <div class="row">
+        @foreach (var item in Model)
+        {
+          <div class="col-sm-4">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="card-img-actions">
+                  <img src="@item.ImageURL" class="d-block w-100 image-fit">
+                </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                <p class="card-text">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                <p class="card-text">
+                  <strong>Precio: </strong>@Html.DisplayFor(modelItem => item.Precio)
+                </p>
+                <p class="card-text">
+                  <small class="text-muted">Categoría: @item.Categoria?.Nombre</small>
+                </p>
+                <a class="btn btn-primary" asp-controller="Carrito" asp-action="Add" asp-route-id="@item.Id">Add</a>
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">View</a>
+              </div>
+            </div>
+          </div>
+        }
+  </div>
 </div>
-
-
-<style>
-    .categoria-link:hover .categoria {
-        transform: translateY(-10px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-    .categoria {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        margin: 0;
-    }
-</style>
