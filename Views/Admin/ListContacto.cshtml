@@ -1,67 +1,15 @@
-@model JAM_BITES.ViewModel.ContactoViewModel
+@model JAM_BITES.ViewModel.CuentaViewModel
 
 @{
-    ViewData["Title"] = "List Contacto - Admin";
+    ViewData["Title"] = "List Cuenta - Admin";
     Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/List.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
-
-<body>
-    <!-- Barra Lateral -->
-
-    <!-- Contenido Principal -->
-    <div class="container">
-        <div class="barra-superior">
-            <h1 class="titulo-pagina">Lista De Contacto</h1>
-            <div class="menu-usuario">
-                <i class="fas fa-bell"></i>
-                <i class="fas fa-cog"></i>
-            </div>
-        </div>
-
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Email</th>
-                        <th>Contraseña</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model.ListContacto != null)
-                    {
-                        @foreach (var item in Model.ListContacto)
-                        {
-                            <tr>
-                                <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Mensaje)</td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+…        });
+    </script>
 </body>
 
 </html>
