@@ -82,6 +82,11 @@ namespace JAM_BITES.Controllers
             return View(viewModel);
         }
 
+        public IActionResult ListMenu()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
