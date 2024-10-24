@@ -1,3 +1,5 @@
+@model JAM_BITES.ViewModel.CategoriaProductoViewModel
+
 @{
     ViewData["Title"] = "List Menu - Admin";
     Layout = null;
@@ -71,12 +73,9 @@
 
         <!-- Contenido Principal -->
         <div id="content" class="content"><br>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button class="btn btn-primary me-md-2 boton boton-primario" type="button">Crear Producto</button>
-                </div>
             <div class="seccion-contenido">
                 <div class="seccion-encabezado">
-                    <h2 class="seccion-titulo">Lista de Menú</h2>
+                    <h2 class="seccion-titulo">Categorias</h2>
                 </div>
 
                 <div class="contenedor-tabla">
@@ -84,50 +83,65 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Producto</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.ListCategoria != null)
+                            {
+                                @foreach (var item in Model.ListCategoria)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary me-md-2 boton boton-primario" type="button">Crear Producto</button>
+            </div>
+            <div class="seccion-contenido">
+                <div class="seccion-encabezado">
+                    <h2 class="seccion-titulo">Lista de Menú</h2>
+                </div>
+
+                <div class="contenedor-tabla">
+                    <table class="table table-bordered" asp-action="Producto">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
                                 <th>Descripcion</th>
                                 <th>Categoria</th>
                                 <th>Precio</th>
+                                <th>FechaCreacion</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>#</td>
-                                <td>Hamburguesa Clásica</td>
-                                <td>Hamburguesa con lechuga, tomate y queso.</td>
-                                <td>Hamburguesa</td>
-                                <td>8.00</td>
-                                <td>
-                                    <div class="menu-acciones">
-                                        <button class="boton boton-primario">Ver Detalles</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>Hamburguesa Doble</td>
-                                <td>Dos piezas de carne, con queso y salsa especial.</td>
-                                <td>Hamburguesa</td>
-                                <td>10.00</td>
-                                <td>
-                                    <div class="menu-acciones">
-                                        <button class="boton boton-primario">Ver Detalles</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#</td>
-                                <td>Hamburguesa Vegetariana</td>
-                                <td>Hamburguesa de soya con ingredientes frescos.</td>
-                                <td>Hamburguesa</td>
-                                <td>7.50</td>
-                                <td>
-                                    <div class="menu-acciones">
-                                        <button class="boton boton-primario">Ver Detalles</button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @if (Model.ListProducto != null)
+                            {
+                                @foreach (var item in Model.ListProducto)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Categoria.Nombre)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Precio)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.FechaCreacion)</td>
+                                        <td>
+                                            <div class="menu-acciones">
+                                                <button class="boton boton-primario">Ver Detalles</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
                         </tbody>
                     </table>
                 </div>

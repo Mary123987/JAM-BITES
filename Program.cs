@@ -35,6 +35,20 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.Value.StartsWith("/Catalogo"))
+    {
+        using (var scope = app.Services.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var categorias = dbContext.DataCategoria.ToList();
+            context.Items["Categorias"] = categorias;
+        }
+    }
+    await next();
+});
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
