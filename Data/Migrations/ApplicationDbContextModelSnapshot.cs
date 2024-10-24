@@ -96,8 +96,8 @@ namespace JAM_BITES.Data.Migrations
                     b.Property<string>("Descripcion")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("FechaCreacion")
+                        .HasColumnType("text");
 
                     b.Property<string>("ImageURL")
                         .HasColumnType("text");

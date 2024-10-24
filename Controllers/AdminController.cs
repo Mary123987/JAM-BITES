@@ -22,8 +22,6 @@ namespace JAM_BITES.Controllers
             _logger = logger;
             _context = context;
         }
-
-
         public IActionResult Index()
         {
             return View();
@@ -103,13 +101,33 @@ namespace JAM_BITES.Controllers
             return View(viewModel);
         }
 
+        public IActionResult FormProducto()
+        {
+            return View();
+        }
+        public IActionResult CrearProducto(CategoriaProductoViewModel viewModel)
+        {
+            _logger.LogDebug("Ingreso a Crear Producto");
+
+            var producto = new Producto
+            {
+                Nombre = viewModel.FormProducto.Nombre,
+                Descripcion = viewModel.FormProducto.Descripcion,
+                Precio = viewModel.FormProducto.Precio,
+                ImageURL = viewModel.FormProducto.ImageURL,
+                Categoria = viewModel.FormProducto.Categoria,
+            };
+
+            _context.Add(producto);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(ListMenu));
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View("Error!");
         }
-
-
     }
 }
