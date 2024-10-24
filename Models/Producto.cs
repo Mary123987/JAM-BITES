@@ -11,7 +11,7 @@ namespace JAM_BITES.Models
         public string? Descripcion { get; set; }
         public Decimal Precio { get; set; }
         public string? ImageURL { get; set; }
-        public DateTime FechaCreacion { get; set; }
+        public string? FechaCreacion { get; set; }
         public Categoria? Categoria { get; set; }
     }
 }

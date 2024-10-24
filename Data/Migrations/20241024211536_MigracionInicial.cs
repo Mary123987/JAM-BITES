@@ -224,7 +224,7 @@ namespace JAM_BITES.Data.Migrations
                     Descripcion = table.Column<string>(type: "text", nullable: true),
                     Precio = table.Column<decimal>(type: "numeric", nullable: false),
                     ImageURL = table.Column<string>(type: "text", nullable: true),
-                    FechaCreacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    FechaCreacion = table.Column<string>(type: "text", nullable: true),
                     CategoriaId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>

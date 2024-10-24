@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JAM_BITES.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241024190241_MigracionInicial")]
+    [Migration("20241024211536_MigracionInicial")]
     partial class MigracionInicial
     {
         /// <inheritdoc />
@@ -99,8 +99,8 @@ namespace JAM_BITES.Data.Migrations
                     b.Property<string>("Descripcion")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("FechaCreacion")
+                        .HasColumnType("text");
 
                     b.Property<string>("ImageURL")
                         .HasColumnType("text");
