@@ -1,10 +1,23 @@
 @model IEnumerable<JAM_BITES.Models.Producto>
 @{
-    ViewData["Title"] = "Catalogo";
+  ViewData["Title"] = "Catalogo";
 }
 
 <div class="container">
   <h1>@ViewData["Title"]</h1>
+
+  @{
+    var message = TempData["Message"] as string;
+  }
+
+  @if (!string.IsNullOrEmpty(message))
+  {
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong></strong> @message
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  }
+
 
   <!-- Filtros -->
   <div class="row mb-4">
@@ -14,9 +27,9 @@
         <select name="categoriaId" class="form-select" onchange="this.form.submit()">
           <option value="">Todas las categorías</option>
           @foreach (var categoria in ViewBag.Categorias ?? new List<Categoria>())
-                    {
-                <option value="@categoria.Id">@categoria.Nombre</option>
-                    }
+          {
+            <option value="@categoria.Id">@categoria.Nombre</option>
+          }
         </select>
       </form>
     </div>
@@ -44,53 +57,54 @@
   </div>
 
   <!-- Mostrar filtros activos -->
-    @if (ViewData["CategoriaActual"] != null)
-    {
-        <div class="alert alert-info">
-          Mostrando productos de la categoría: @ViewData["CategoriaActual"]
-          <a asp-action="Index" class="float-end">Quitar filtro</a>
-        </div>
-    }
-    @if (ViewData["RangoPrecio"] != null)
-    {
-        <div class="alert alert-info">
-            @ViewData["RangoPrecio"]
-          <a asp-action="Index" class="float-end">Quitar filtro</a>
-        </div>
-    }
-    @if (ViewData["TerminoBusqueda"] != null)
-    {
-        <div class="alert alert-info">
-          Resultados para: @ViewData["TerminoBusqueda"]
-          <a asp-action="Index" class="float-end">Quitar filtro</a>
-        </div>
-    }
+  @if (ViewData["CategoriaActual"] != null)
+  {
+    <div class="alert alert-info">
+      Mostrando productos de la categoría: @ViewData["CategoriaActual"]
+      <a asp-action="Index" class="float-end">Quitar filtro</a>
+    </div>
+  }
+  @if (ViewData["RangoPrecio"] != null)
+  {
+    <div class="alert alert-info">
+      @ViewData["RangoPrecio"]
+      <a asp-action="Index" class="float-end">Quitar filtro</a>
+    </div>
+  }
+  @if (ViewData["TerminoBusqueda"] != null)
+  {
+    <div class="alert alert-info">
+      Resultados para: @ViewData["TerminoBusqueda"]
+      <a asp-action="Index" class="float-end">Quitar filtro</a>
+    </div>
+  }
 
   <!-- Grid de productos -->
   <div class="row">
-        @foreach (var item in Model)
-        {
-          <div class="col-sm-4">
-            <div class="card mb-3">
-              <div class="card-body">
-                <div class="card-img-actions">
-                  <img src="@item.ImageURL" class="d-block w-100 image-fit" style="width: 420px; height: 420px; object-fit: cover;">
-                </div>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
-                <p class="card-text">@Html.DisplayFor(modelItem => item.Descripcion)</p>
-                <p class="card-text">
-                  <strong>Precio: </strong>@Html.DisplayFor(modelItem => item.Precio)
-                </p>
-                <p class="card-text">
-                  <small class="text-muted">Categoría: @item.Categoria?.Nombre</small>
-                </p>
-                <a class="btn btn-primary" asp-controller="Carrito" asp-action="Add" asp-route-id="@item.Id">Add</a>
-                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">View</a>
-              </div>
+    @foreach (var item in Model)
+    {
+      <div class="col-sm-4">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="card-img-actions">
+              <img src="@item.ImageURL" class="d-block w-100 image-fit"
+                style="width: 420px; height: 420px; object-fit: cover;">
             </div>
           </div>
-        }
+          <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+            <p class="card-text">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+            <p class="card-text">
+              <strong>Precio: </strong>@Html.DisplayFor(modelItem => item.Precio)
+            </p>
+            <p class="card-text">
+              <small class="text-muted">Categoría: @item.Categoria?.Nombre</small>
+            </p>
+            <a class="btn btn-primary" asp-controller="Carrito" asp-action="Add" asp-route-id="@item.Id">Add</a>
+            <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">View</a>
+          </div>
+        </div>
+      </div>
+    }
   </div>
 </div>

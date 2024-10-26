@@ -1,0 +1,74 @@
+@model IEnumerable<JAM_BITES.Models.Carrito>
+
+<h1 class="text-center mb-4" style="color: #d62027;">Carrito de Compras</h1>
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead style="background-color: #d62027; color: white;">
+            <tr>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Producto.Nombre)</td>
+                    <td>
+                        <form asp-action="UpdateQuantity" method="post" class="d-flex align-items-center">
+                            <input type="hidden" name="id" value="@item.Producto.Id" />
+                            <input type="number" name="cantidad" value="@item.Cantidad" min="1"
+                                class="form-control form-control-sm mr-2" style="width: 60px;" />
+                            <button type="submit" class="btn btn-sm" style="background-color: #d62027; color: white;">
+                                Actualizar
+                            </button>
+                        </form>
+                    </td>
+
+                    <td>S/. @(item.Producto.Precio * item.Cantidad)</td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Producto.Id" class="text-danger"
+                            style="text-decoration: none;">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-right mt-4">
+        <h4 style="color: #d62027;">Total: S/. @ViewData["Total"]</h4>
+    </div>
+
+    <div class="d-flex justify-content-end mt-3">
+        <a href="/Catalogo/Checkout" class="btn" style="background-color: #d62027; color: white;">Proceder al Pago</a>
+    </div>
+</div>
+
+<style>
+    /* Estilo para resaltar las filas */
+    .table tbody tr:hover {
+        background-color: #f8d7da;
+        /* Color de fondo de fila en hover */
+    }
+
+    /* Estilo para enlaces de eliminar */
+    .text-danger:hover {
+        color: #b71c1c;
+        font-weight: bold;
+    }
+
+    /* Añadir un borde amarillo mostaza en la cabecera */
+    .table thead th {
+        border-top: 3px solid #d62027;
+        border-bottom: 3px solid #ffc107;
+        /* amarillo mostaza */
+    }
+
+    /* Estilos para el botón de "Actualizar" */
+    .btn-sm {
+        border-radius: 20px;
+    }
+</style>
