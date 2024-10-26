@@ -66,22 +66,22 @@
       <form asp-controller="Contacto" asp-action="Enviar" method="post">
         <div class="form-group">
           <label asp-for="FormContacto.Nombre" class="control-label">Nombre:</label>
-          <input asp-for="FormContacto.Nombre" class="form-control" />
+          <input asp-for="FormContacto.Nombre" class="form-control" required/>
         </div>
         <br />
         <div class="form-group">
           <label asp-for="FormContacto.Email" class="control-label">Correo:</label>
-          <input asp-for="FormContacto.Email" class="form-control" type="email" />
+          <input asp-for="FormContacto.Email" class="form-control" type="email" required/>
         </div>
         <br />
         <div class="form-group">
           <label asp-for="FormContacto.Telefono" class="control-label">Telefono:</label>
-          <input asp-for="FormContacto.Telefono" class="form-control" type="tel" pattern="[0-9]{9}"/>
+          <input asp-for="FormContacto.Telefono" class="form-control" type="tel" pattern="[0-9]{9}" required/>
         </div>
         <br />
         <div class="form-group">
           <label asp-for="FormContacto.Mensaje" class="control-label">Mensaje:</label>
-          <textarea asp-for="FormContacto.Mensaje" class="form-control"></textarea>
+          <textarea asp-for="FormContacto.Mensaje" class="form-control" required></textarea>
         </div>
         <br />
 
