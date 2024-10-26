@@ -1,0 +1,40 @@
+@model JAM_BITES.Models.RespuestaNoticias
+
+<h1>Noticias de Entretenimiento</h1>
+
+@if (Model?.Items != null && Model.Items.Count > 0)
+{
+    <ul>
+        @foreach (var item in Model.Items)
+        {
+            <li>
+                <h2>@item.Title</h2>
+                <p>@item.Snippet</p>
+                <p><strong>Publicado por:</strong> @item.Publisher</p>
+                <p><strong>Fecha:</strong> @item.Timestamp.ToString("g")</p>
+                <a href="@item.NewsUrl" target="_blank">Leer más</a>
+                <img src="@item.Images?.Thumbnail" alt="Thumbnail" />
+
+                @if (item.HasSubnews && item.Subnews != null)
+                {
+                    <h3>Subnoticias:</h3>
+                    <ul>
+                        @foreach (var subnews in item.Subnews)
+                        {
+                            <li>
+                                <h4>@subnews.Title</h4>
+                                <p>@subnews.Snippet</p>
+                                <a href="@subnews.NewsUrl" target="_blank">Leer más</a>
+                                <img src="@subnews.Images?.Thumbnail" alt="Thumbnail" />
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No hay noticias para mostrar en este momento.</p>
+}

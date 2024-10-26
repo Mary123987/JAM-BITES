@@ -1,0 +1,151 @@
+@model JAM_BITES.Models.RespuestaNoticias
+
+<div class="news-container">
+    <h1>Noticias de Entretenimiento</h1>
+
+    @if (Model?.Items != null && Model.Items.Count > 0)
+    {
+        <ul class="news-list">
+            @foreach (var item in Model.Items)
+            {
+                <li class="news-item">
+                    <h2>@item.Title</h2>
+                    <p>@item.Snippet</p>
+                    <p><strong>Publicado por:</strong> @item.Publisher</p>
+
+                    <!-- Conversión del timestamp a una fecha legible -->
+                    @{
+                        var fecha = DateTimeOffset.FromUnixTimeMilliseconds(item.Timestamp).DateTime;
+                    }
+                    <p><strong>Fecha:</strong> @fecha.ToString("dd/MM/yyyy HH:mm")</p>
+
+                    <a href="@item.NewsUrl" target="_blank">Leer más</a>
+
+                    <!-- Mostrar imagen principal con fallback -->
+                    @if (item.Images != null && !string.IsNullOrEmpty(item.Images.Thumbnail))
+                    {
+                        <img src="@item.Images.Thumbnail" alt="Imagen principal" onerror="this.onerror=null; this.src='/images/default-image.jpg';" />
+                    }
+                    else if (item.Images != null && !string.IsNullOrEmpty(item.Images.ThumbnailProxied))
+                    {
+                        <img src="@item.Images.ThumbnailProxied" alt="Imagen principal (proxied)" onerror="this.onerror=null; this.src='/images/default-image.jpg';" />
+                    }
+                    else
+                    {
+                        <p>No hay imagen disponible.</p>
+                    }
+
+                    <!-- Subnoticias -->
+                    @if (item.HasSubnews && item.Subnews != null && item.Subnews.Count > 0)
+                    {
+                        <div class="subnews">
+                            <h3>Subnoticias:</h3>
+                            <ul>
+                                @foreach (var subnews in item.Subnews)
+                                {
+                                    <li class="subnews-item">
+                                        <h4>@subnews.Title</h4>
+                                        <p>@subnews.Snippet</p>
+                                        <a href="@subnews.NewsUrl" target="_blank">Leer más</a>
+
+                                        <!-- Mostrar imagen de subnoticia con fallback -->
+                                       @if (subnews.Images != null)
+                                            {
+                                                if (!string.IsNullOrEmpty(subnews.Images.Thumbnail))
+                                                {
+                                                    <img src="@subnews.Images.Thumbnail" alt="Imagen de subnoticia" onerror="this.onerror=null; this.src='/images/default-image.jpg';" />
+                                                }
+                                                else if (!string.IsNullOrEmpty(subnews.Images.ThumbnailProxied))
+                                                {
+                                                    <img src="@subnews.Images.ThumbnailProxied" alt="Imagen de subnoticia (proxied)" onerror="this.onerror=null; this.src='/images/default-image.jpg';" />
+                                                }
+                                                else
+                                                {
+                                                    <p>No hay imagen disponible para esta subnoticia.</p>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <p>No hay imágenes disponibles para esta subnoticia.</p>
+                                            }
+
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No hay noticias para mostrar en este momento.</p>
+    }
+</div>
+
+<style>
+    /* Diseño centrado debajo de la barra de navegación */
+    .news-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: left;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    h1 {
+        text-align: center;
+        color: #4a4a8b;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    /* Diseño de lista de noticias */
+    .news-list {
+        list-style: none;
+        padding: 0;
+    }
+    .news-item {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .news-item h2, .news-item h3, .news-item h4 {
+        color: #333;
+    }
+    .news-item p, .news-item a {
+        margin: 10px 0;
+    }
+    .news-item a {
+        color: #4a4a8b;
+        text-decoration: none;
+    }
+    .news-item a:hover {
+        text-decoration: underline;
+    }
+
+    /* Estilo de las imágenes */
+    .news-item img, .subnews-item img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 15px 0;
+        border-radius: 4px;
+    }
+
+    /* Subnoticias */
+    .subnews {
+        margin-top: 20px;
+        padding-left: 10px;
+    }
+    .subnews-item {
+        background: #f7f7fa;
+        border-radius: 4px;
+        padding: 10px;
+        margin: 10px 0;
+    }
+</style>

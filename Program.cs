@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using JAM_BITES.Data;
+using JAM_BITES.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,12 +16,17 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+<<<<<<< HEAD
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromSeconds(1500);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+=======
+
+builder.Services.AddHttpClient<IServicioNoticias, ServicioNoticias>();
+>>>>>>> 0fda915 (API NOTICIAS)
 
 var app = builder.Build();
 
