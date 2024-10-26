@@ -25,6 +25,7 @@ builder.Services.AddSession(options =>
 
 
 builder.Services.AddHttpClient<IServicioNoticias, ServicioNoticias>();
+builder.Services.AddMemoryCache();
 
 builder.Services.AddSwaggerGen(c =>
 {
