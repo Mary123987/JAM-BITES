@@ -73,6 +73,26 @@ namespace JAM_BITES.Controllers
             return View("Index", productos);
         }
 
+        // Método para mostrar el detalle de un producto
+        public async Task<IActionResult> Details(long? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var producto = await _context.DataProducto
+                .Include(p => p.Categoria)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (producto == null)
+            {
+                return NotFound();
+            }
+
+            return View(producto);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

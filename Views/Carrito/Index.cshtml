@@ -1,5 +1,17 @@
 @model IEnumerable<JAM_BITES.Models.Carrito>
 
+@{
+    var message = TempData["Message"] as string;
+}
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong></strong> @message
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+
 <h1 class="text-center mb-4" style="color: #d62027;">Carrito de Compras</h1>
 
 <div class="container">
@@ -28,7 +40,7 @@
                         </form>
                     </td>
 
-                    <td>S/. @(item.Producto.Precio * item.Cantidad)</td>
+                    <td>$@Html.DisplayFor(modelItem => item.Producto.Precio)</td>
                     <td>
                         <a asp-action="Delete" asp-route-id="@item.Producto.Id" class="text-danger"
                             style="text-decoration: none;">Eliminar</a>
@@ -39,7 +51,7 @@
     </table>
 
     <div class="text-right mt-4">
-        <h4 style="color: #d62027;">Total: S/. @ViewData["Total"]</h4>
+        <h4 style="color: #d62027;">Total: @ViewData["Total"]</h4>
     </div>
 
     <div class="d-flex justify-content-end mt-3">
