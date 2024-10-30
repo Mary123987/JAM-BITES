@@ -59,13 +59,21 @@
             <span>Contactos</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="~/Admin/Redes" class="nav-link">
+            <i class="fas fa-chart-line"></i>
+            <span>Redes</span>
+          </a>
+        </li>
       </ul>
 
       <div class="sidebar-footer">
         <div class="user-info">
           <div class="user-details">
-            <span class="mb-0" href="~/Admin/Index">Salir </span>
-            <i class="fas fa-chevron-down"></i>
+            <a href="~/Admin/Index" style="color:black">
+              <span class="mb-0">Salir </span>
+              <i class="fas fa-chevron-down"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -103,15 +111,15 @@
                 <div class="form-group">
                   <label asp-for="FormProducto.Categoria" class="control-label">Categoria</label>
                   <select asp-for="FormProducto.Categoria" class="form-control">
-                        <option value="1">Hamburguesas</option>
-                        <option value="2">Combos</option>
-                        <option value="3">Complementos</option>
-                        <option value="3">Bebidas</option>
-                    </select>
+                    <option value="1">Hamburguesas</option>
+                    <option value="2">Combos</option>
+                    <option value="3">Complementos</option>
+                    <option value="3">Bebidas</option>
+                  </select>
                 </div><br>
                 <div class="form-group">
-                    <label asp-for="FormProducto.FechaCreacion" class="control-label">Fecha de Creación:</label>
-                    <input asp-for="FormProducto.FechaCreacion" type="date" class="form-control" required />
+                  <label asp-for="FormProducto.FechaCreacion" class="control-label">Fecha de Creación:</label>
+                  <input asp-for="FormProducto.FechaCreacion" type="date" class="form-control" required />
                 </div><br>
 
                 <div class="form-group text-center">

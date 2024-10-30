@@ -124,6 +124,11 @@ namespace JAM_BITES.Controllers
             return RedirectToAction(nameof(ListMenu));
         }
 
+        public IActionResult Redes()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
