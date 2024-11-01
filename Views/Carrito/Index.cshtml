@@ -55,32 +55,30 @@
     </div>
 
     <div class="d-flex justify-content-end mt-3">
-        <a href="/Checkout/Recojo" class="btn btn-primary me-2" style="background-color: #d62027; color: white; border-color: #d62027;">Proceder al Pago</a>
-        <a href="/Catalogo/Index" class="btn btn-secondary" style="background-color: white; color: #d62027; border-color: #d62027;">Volver al Catálogo</a>
+        <a href="@Url.Action("Checkout", "Carrito")" class="btn btn-primary me-2"
+            style="background-color: #d62027; color: white; border-color: #d62027;">
+            Proceder al Pago
+        </a>
+        <a href="/Catalogo/Index" class="btn btn-secondary"
+            style="background-color: white; color: #d62027; border-color: #d62027;">Volver al Catálogo</a>
     </div>
 </div>
 
 <style>
-    /* Estilo para resaltar las filas */
     .table tbody tr:hover {
         background-color: #f8d7da;
-        /* Color de fondo de fila en hover */
     }
 
-    /* Estilo para enlaces de eliminar */
     .text-danger:hover {
         color: #b71c1c;
         font-weight: bold;
     }
 
-    /* Añadir un borde amarillo mostaza en la cabecera */
     .table thead th {
         border-top: 3px solid #d62027;
         border-bottom: 3px solid #ffc107;
-        /* amarillo mostaza */
     }
 
-    /* Estilos para el botón de "Actualizar" */
     .btn-sm {
         border-radius: 20px;
     }

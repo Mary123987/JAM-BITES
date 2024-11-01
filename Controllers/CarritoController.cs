@@ -104,6 +104,21 @@ namespace JAM_BITES.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Checkout()
+        {
+            List<Carrito> carrito = Helper.SessionExtensions.Get<List<Carrito>>(HttpContext.Session, "carritoSesion");
+            decimal total = carrito?.Sum(item => item.Producto.Precio * item.Cantidad) ?? 0;
+
+            if (carrito == null || !carrito.Any() || total <= 0)
+            {
+                TempData["Message"] = "No puedes proceder al pago. El carrito está vacío";
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Recojo", "Checkout");
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
