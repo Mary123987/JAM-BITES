@@ -2,10 +2,85 @@
     ViewData["Title"] = "Home Page";
 }
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+        }
+
+        .carousel-inner {
+            max-height: 500px; /* Altura fija para las imágenes */
+            overflow: hidden; /* Asegura que no haya desbordamiento */
+        }
+
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ajusta las imágenes sin distorsionarse */
+        }
+
+        .online-promos h2 {
+            font-weight: bold;
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .online-promos-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px; /* Espacio entre las tarjetas */
+        }
+
+        .promo-item {
+            width: calc(33.33% - 20px); /* Tamaño del cuadro para 3 por fila */
+            height: 400px; /* Alto del cuadro */
+            text-align: center;
+            overflow: hidden;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #fff; /* Fondo blanco para contraste */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para efecto de elevación */
+            transition: transform 0.2s; /* Transición suave para el efecto hover */
+        }
+
+        .promo-item:hover {
+            transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+        }
+
+        .promo-item img {
+            width: 100%;
+            height: 250px; /* Define la altura para la imagen */
+            object-fit: cover; /* La imagen cubre el cuadro proporcionalmente */
+            border-radius: 8px; /* Redondeo de la imagen */
+        }
+
+        .promo-item h3 {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #555; /* Color más suave para el texto */
+        }
+
+        .promo-item span {
+            color: #d62027; /* Color destacado para el precio */
+            font-weight: bold;
+        }
+
+    </style>
+</head>
 <body>
 
     <div class="container">
-        <div id="carouselExampleIndicators" class="carousel slide">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -39,124 +114,57 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+
+        <br>
+
+        <!-- Sección de Promociones Online -->
+        <section class="online-promos">
+            <h2>Promociones Online</h2>
+            <div class="online-promos-container">
+                <div class="promo-item">
+                    <img src="https://img.freepik.com/fotos-premium/trio-hamburguesas-queso-tocino-lechuga-fotografia-comida-primer-plano_616001-24685.jpg" alt="Trio Compartir">
+                    <h3>Trio Compartir</h3>
+                    <span>S/ 29.99</span>
+                    <p>Disfruta de tres deliciosas hamburguesas perfectas para compartir.</p>
+                </div>
+                <div class="promo-item">
+                    <img src="https://img.freepik.com/fotos-premium/plato-nuggets-pollo-papas-fritas-ketchup-tabla-cortar_106006-11547.jpg" alt="Nuggets">
+                    <h3>Nuggets</h3>
+                    <span>S/ 14.99</span>
+                    <p>Un plato irresistible de nuggets de pollo y papas fritas.</p>
+                </div>
+                <div class="promo-item">
+                    <img src="https://image.made-in-china.com/2f0j00mcLlPVGqrNgO/1000-Pieces-of-Disposable-Sundae-Cup-Commercial-Thickened-Ice-Cream-Ice-Cream-Cup-Milkshake-Plastic-with-Lid.webp" alt="Helados de Locura">
+                    <h3>Helados de Locura</h3>
+                    <span>S/ 15.99</span>
+                    <p>Una selección de helados que te hará perder la cabeza.</p>
+                </div>
+                <div class="promo-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3FHdOofotwmDZ-sVru39CBkN5oVVmnwGrJw&s" alt="Pack de Gaseosas">
+                    <h3>Pack de Gaseosas</h3>
+                    <span>S/ 12.99</span>
+                    <p>Elige tus sabores favoritos en este pack refrescante.</p>
+                </div>
+                <div class="promo-item">
+                    <img src="https://www.burgerking.pe/Multimedia/productos/detalle/El_Rey_STACKER_Para_4_v1.PNG" alt="Comelon de Locura">
+                    <h3>Comelon de Locura</h3>
+                    <span>S/ 45.99</span>
+                    <p>Cuatro hamburguesas gigantes acompañado de papas.</p>
+                </div>
+                <div class="promo-item">
+                    <img src="https://i.pinimg.com/564x/a7/9e/cd/a79ecd1594beb5fb9a8fd032bf6e2402.jpg" alt="Papa fest">
+                    <h3>Papa fest</h3>
+                    <span>S/ 11.99</span>
+                     <p>Papas fritas servidas con una variedad de salsas para mojar.
+                </div>
+            </div>
+        </section>
+
     </div>
 
-    <br>
-    <section class="online-promos">
-        <h2>Promociones Online</h2>
-        <div class="online-promos-container">
-            <div class="promo-item">
-                <img src="https://img.freepik.com/fotos-premium/trio-hamburguesas-queso-tocino-lechuga-fotografia-comida-primer-plano_616001-24685.jpg"
-                    alt="Burger 1">
-                <h3>Trio Compartir</h3>
-                <span>S/ 29.99</span>
-            </div>
-            <div class="promo-item">
-                <img src="https://img.freepik.com/fotos-premium/plato-nuggets-pollo-papas-fritas-ketchup-tabla-cortar_106006-11547.jpg"
-                    alt="Burger 2">
-                <h3>Nuggets</h3>
-                <span>S/ 14.99</span>
-            </div>
-            <div class="promo-item">
-                <img src="https://image.made-in-china.com/2f0j00mcLlPVGqrNgO/1000-Pieces-of-Disposable-Sundae-Cup-Commercial-Thickened-Ice-Cream-Ice-Cream-Cup-Milkshake-Plastic-with-Lid.webp"
-                    alt="Burger 3">
-                <h3>Helados de Locura</h3>
-                <span>S/ 25.99</span>
-            </div>
-        </div>
-    </section>
+    <!-- Scripts de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 
-    <section class="online-promos">
-        <div class="online-promos-container">
-            <div class="promo-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3FHdOofotwmDZ-sVru39CBkN5oVVmnwGrJw&s"
-                    alt="Burger 4">
-                <h3>Pack de Gaseosas</h3>
-                <span>S/ 17.99</span>
-            </div>
-            <div class="promo-item">
-                <img src="https://www.burgerking.pe/Multimedia/productos/detalle/El_Rey_STACKER_Para_4_v1.PNG"
-                    alt="Burger 5">
-                <h3>Comelon de Locura</h3>
-                <span>S/ 45.99</span>
-            </div>
-            <div class="promo-item">
-                <img src="https://i.pinimg.com/564x/a7/9e/cd/a79ecd1594beb5fb9a8fd032bf6e2402.jpg"
-                    alt="Papas">
-                <h3>Papa fest</h3>
-                <span>S/ 19.99</span>
-            </div>
-        </div>
-    </section>
 </body>
-
-<style>
-    * body {
-        font-family: Arial, sans-serif;
-        background-color: #f8f8f8;
-    }
-
-    .carousel-inner {
-        max-height: 500px;
-        /* Altura fija para las imágenes */
-        overflow: hidden;
-        /* Asegura que no haya desbordamiento */
-    }
-
-    .carousel-inner img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        /* Hace que las imágenes se ajusten al tamaño del contenedor sin distorsionarse */
-    }
-
-    .online-promos h2 {
-        font-weight: bold;
-        /* O usa un valor numérico, como 700 */
-        font-size: 2em;
-        /* Si quieres ajustar el tamaño también */
-        text-align: center;
-        /* Para centrar el texto si lo deseas */
-    }
-
-    .online-promos-container {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 20px;
-    }
-
-    .promo-item {
-        width: 200px;
-        /* Tamaño del cuadro */
-        height: 250px;
-        /* Alto del cuadro */
-        text-align: center;
-        overflow: hidden;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        padding: 10px;
-        background-color: #f8f8f8;
-    }
-
-    .promo-item img {
-        width: 100%;
-        height: 150px;
-        /* Define la altura para la imagen */
-        object-fit: cover;
-        /* La imagen cubre el cuadro proporcionalmente */
-        border-radius: 8px;
-        /* Redondeo de la imagen */
-    }
-
-    .promo-item h3 {
-        margin: 10px 0;
-        font-size: 18px;
-    }
-
-    .promo-item span {
-        color: #d62027;
-        font-weight: bold;
-    }
-</style>
-
 </html>
