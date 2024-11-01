@@ -1,0 +1,151 @@
+@{
+    ViewData["Title"] = "Selecciona tu forma de entrega";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center" style="color: #d62027;">Selecciona tu forma de entrega</h1>
+
+    <!-- Tabs de entrega -->
+    <ul class="nav nav-tabs mt-4" id="entregaTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="delivery-tab" data-bs-toggle="tab" data-bs-target="#delivery"
+                type="button" role="tab" aria-controls="delivery" aria-selected="true">
+                <i class="fa fa-truck"></i> Delivery
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tienda-tab" data-bs-toggle="tab" data-bs-target="#tienda" type="button"
+                role="tab" aria-controls="tienda" aria-selected="false">
+                <i class="fa fa-store"></i> Recoger en tienda
+            </button>
+        </li>
+    </ul>
+    <!-- Contenido de las pestañas -->
+    <div class="tab-content mt-3" id="entregaTabsContent">
+        <!-- Tab de Delivery con mapa y búsqueda de dirección -->
+        <div class="tab-pane fade show active" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">
+            <h4 class="text-center mt-4" style="color: #d62027;">Escribe la dirección a donde enviaremos tu pedido</h4>
+
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="direccion" placeholder="Ingrese una dirección">
+                <button type="button" class="btn btn-primary mt-2" onclick="buscarDireccion()"
+                    style="background-color: #d62027; color: white;">
+                    Buscar
+                </button>
+            </div>
+
+            <!-- Mapa de Leaflet -->
+            <div style="width: 100%; max-width: 100%; overflow: hidden; padding: 0; margin: 0;">
+                <div id="map" style="width: 100%; height: 400px; border-radius: 10px;"></div>
+            </div>
+
+
+            <div class="text-center mt-3">
+                <button class="btn btn-link" style="color: #d62027;">Usar mi ubicación actual</button>
+                <p style="font-size: 0.9rem; color: #888;">Margen de precisión: 4 metros</p>
+            </div>
+        </div>
+
+        <!-- Tab de Recoger en tienda -->
+        <div class="tab-pane fade" id="tienda" role="tabpanel" aria-labelledby="tienda-tab">
+            <h4 class="text-center mt-4" style="color: #d62027;">Selecciona la tienda donde recogerás tu pedido</h4>
+
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Miraflores</h5>
+                            <p class="card-text">Av. Benavides Nº 1821</p>
+                            <a href="/Catalogo/ConfirmarCompra?tienda=Miraflores" class="btn btn-primary"
+                                style="background-color: #d62027; color: white;">Recoger aquí</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">San Borja</h5>
+                            <p class="card-text">Av. Aviación 2800</p>
+                            <a href="/Catalogo/ConfirmarCompra?tienda=SanBorja" class="btn btn-primary"
+                                style="background-color: #d62027; color: white;">Recoger aquí</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Estilos adicionales -->
+<style>
+    .nav-tabs .nav-link {
+        color: #d62027;
+    }
+
+    .nav-tabs .nav-link.active {
+        background-color: #ffc107;
+        color: #d62027;
+        border-color: #ffc107 #ffc107 #fff;
+    }
+
+    #map-container,
+    #map {
+        height: 400px;
+        width: 100%;
+        position: relative;
+        display: block;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<!-- Script de Leaflet para el mapa -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    // Inicializar el mapa y agregar la capa de OpenStreetMap
+    var map = L.map('map').setView([-12.0464, -77.0428], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Forzar la actualización del tamaño del mapa al seleccionar la pestaña "Delivery"
+    document.getElementById('delivery-tab').addEventListener('click', function () {
+        setTimeout(function () {
+            map.invalidateSize();  // Recalcular las dimensiones del mapa
+        }, 500); // Tiempo de espera para que la pestaña se cargue completamente
+    });
+    // Función para buscar dirección
+    function buscarDireccion() {
+        var direccion = document.getElementById('direccion').value;
+        if (direccion) {
+            // Ejemplo de consulta a la API de búsqueda de OpenStreetMap (Nominatim)
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${direccion}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        var lugar = data[0];
+                        var lat = lugar.lat;
+                        var lon = lugar.lon;
+
+                        // Centrar el mapa en la ubicación encontrada
+                        map.setView([lat, lon], 15);
+
+                        // Añadir un marcador en la ubicación
+                        L.marker([lat, lon]).addTo(map)
+                            .bindPopup(`Ubicación encontrada: ${direccion}`)
+                            .openPopup();
+                    } else {
+                        alert('No se encontraron resultados para la dirección ingresada.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al buscar la dirección:', error);
+                });
+        } else {
+            alert('Por favor, ingrese una dirección.');
+        }
+    }
+</script>
