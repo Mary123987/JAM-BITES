@@ -59,7 +59,7 @@ namespace JAM_BITES.Controllers
             Helper.SessionExtensions.Set<List<Carrito>>(HttpContext.Session, "carritoSesion", carrito);
             TempData["Message"] = "Se Agrego al carrito";
             _logger.LogInformation("Se agrego un producto al carrito");
-            return RedirectToAction("Index", "Carrito");
+            return RedirectToAction("Details", "Catalogo");
         }
 
         [HttpPost]

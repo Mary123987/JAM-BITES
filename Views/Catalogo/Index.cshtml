@@ -6,18 +6,6 @@
 <div class="container">
   <h1 style="color: #d62027;">@ViewData["Title"]</h1>
 
-  @{
-    var message = TempData["Message"] as string;
-  }
-
-  @if (!string.IsNullOrEmpty(message))
-  {
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong></strong> @message
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  }
-
   <!-- Filtros -->
   <div class="row mb-4">
     <div class="col-md-3">
