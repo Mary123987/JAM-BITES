@@ -2,6 +2,7 @@
     ViewData["Title"] = "Selecciona tu forma de entrega";
 }
 
+<link rel="stylesheet" href="~/css/Recojo.css" />
 <div class="container mt-4">
     <h1 class="text-center" style="color: #d62027;">Selecciona tu forma de entrega</h1>
 
@@ -28,24 +29,40 @@
             <h4 class="text-center mt-4" style="color: #d62027;">Escribe la dirección a donde enviaremos tu pedido</h4>
 
             <div class="mb-3">
-                <label for="direccion" class="form-label">Dirección</label>
-                <input type="text" class="form-control" id="direccion" placeholder="Ingrese una dirección">
-                <button type="button" class="btn btn-primary mt-2" onclick="buscarDireccion()"
-                    style="background-color: #d62027; color: white;">
-                    Buscar
-                </button>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="direccion" placeholder="Ingrese una dirección">
+                    <button type="button" class="btn btn-primary" onclick="buscarDireccion()"
+                        style="background-color: #d62027; color: white;">
+                        <i class="fa fa-search"></i> Buscar
+                    </button>
+                </div>
             </div>
 
             <!-- Contenedor del mapa con dimensiones fijas -->
             <div class="map-container">
                 <div id="map"></div>
+                <!-- Overlay para loading -->
+                <div id="map-loading" class="map-loading d-none">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                    </div>
+                </div>
             </div>
 
             <div class="text-center mt-3">
-                <button class="btn btn-link" style="color: #d62027;" onclick="obtenerUbicacionActual()">
-                    Usar mi ubicación actual
+                <button class="btn btn-outline-primary" style="color: #d62027; border-color: #d62027;"
+                    onclick="obtenerUbicacionActual()">
+                    <i class="fa fa-location-dot"></i> Usar mi ubicación actual
                 </button>
                 <p style="font-size: 0.9rem; color: #888;">Margen de precisión: 4 metros</p>
+            </div>
+
+            <!-- Botón Siguiente -->
+            <div class="text-center mt-4">
+                <button id="btnSiguiente" class="btn btn-lg btn-primary"
+                    style="background-color: #d62027; color: white;" onclick="continuarPedido()" disabled>
+                    Continuar <i class="fa fa-arrow-right"></i>
+                </button>
             </div>
         </div>
 
@@ -59,8 +76,11 @@
                         <div class="card-body">
                             <h5 class="card-title">Miraflores</h5>
                             <p class="card-text">Av. Benavides Nº 1821</p>
-                            <a href="/Catalogo/ConfirmarCompra?tienda=Miraflores" class="btn btn-primary"
-                                style="background-color: #d62027; color: white;">Recoger aquí</a>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                    value="option2">
+                                <label class="form-check-label" for="inlineRadio2">Recoger Aquí</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -69,45 +89,27 @@
                         <div class="card-body">
                             <h5 class="card-title">San Borja</h5>
                             <p class="card-text">Av. Aviación 2800</p>
-                            <a href="/Catalogo/ConfirmarCompra?tienda=SanBorja" class="btn btn-primary"
-                                style="background-color: #d62027; color: white;">Recoger aquí</a>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                    value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Recoger Aquí</label>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Botón Siguiente -->
+            <div class="text-center mt-4">
+                <a id="btnSiguiente" class="btn btn-lg btn-primary" style="background-color: #d62027; color: white;"
+                    href="/Checkout/Pago" role="button">
+                    Continuar <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
         </div>
     </div>
 </div>
-
-<!-- Estilos mejorados -->
-<style>
-    .nav-tabs .nav-link {
-        color: #d62027;
-    }
-
-    .nav-tabs .nav-link.active {
-        background-color: #ffc107;
-        color: #d62027;
-        border-color: #ffc107 #ffc107 #fff;
-    }
-
-    .map-container {
-        position: relative;
-        width: 100%;
-        height: 400px;
-        margin: 20px 0;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    #map {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-</style>
 
 <!-- Scripts mejorados -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -116,6 +118,7 @@
 <script>
     let map;
     let marker;
+    let currentLocation = null;
 
     // Inicializar el mapa cuando el DOM esté listo
     document.addEventListener('DOMContentLoaded', function () {
@@ -128,7 +131,6 @@
                 if (map) {
                     setTimeout(function () {
                         map.invalidateSize();
-                        // Si hay un marcador, centrar en él
                         if (marker) {
                             map.setView(marker.getLatLng(), 15);
                         }
@@ -158,6 +160,20 @@
         setTimeout(() => map.invalidateSize(), 100);
     }
 
+    function mostrarLoading(mostrar) {
+        const loading = document.getElementById('map-loading');
+        if (mostrar) {
+            loading.classList.remove('d-none');
+        } else {
+            loading.classList.add('d-none');
+        }
+    }
+
+    function actualizarBotonSiguiente(habilitar) {
+        const btnSiguiente = document.getElementById('btnSiguiente');
+        btnSiguiente.disabled = !habilitar;
+    }
+
     function buscarDireccion() {
         const direccion = document.getElementById('direccion').value;
         if (!direccion) {
@@ -165,7 +181,7 @@
             return;
         }
 
-        // Añadir "Lima, Perú" a la búsqueda para mejorar precisión
+        mostrarLoading(true);
         const searchQuery = `${direccion}, Lima, Perú`;
 
         fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchQuery)}`)
@@ -174,8 +190,12 @@
                 if (data && data.length > 0) {
                     const lugar = data[0];
                     const latLng = [parseFloat(lugar.lat), parseFloat(lugar.lon)];
+                    currentLocation = {
+                        lat: lugar.lat,
+                        lon: lugar.lon,
+                        address: direccion
+                    };
 
-                    // Actualizar o crear marcador
                     if (marker) {
                         marker.setLatLng(latLng);
                     } else {
@@ -184,13 +204,19 @@
 
                     marker.bindPopup(`Ubicación: ${direccion}`).openPopup();
                     map.setView(latLng, 16);
+                    actualizarBotonSiguiente(true);
                 } else {
                     alert('No se encontraron resultados para la dirección ingresada.');
+                    actualizarBotonSiguiente(false);
                 }
             })
             .catch(error => {
                 console.error('Error al buscar la dirección:', error);
                 alert('Error al buscar la dirección. Por favor, intente nuevamente.');
+                actualizarBotonSiguiente(false);
+            })
+            .finally(() => {
+                mostrarLoading(false);
             });
     }
 
@@ -200,18 +226,27 @@
             return;
         }
 
+        mostrarLoading(true);
+
         navigator.geolocation.getCurrentPosition(
             function (position) {
                 const latLng = [position.coords.latitude, position.coords.longitude];
+                currentLocation = {
+                    lat: position.coords.latitude,
+                    lon: position.coords.longitude
+                };
 
-                // Actualizar o crear marcador
+                // Crear un icono personalizado para la ubicación actual
+                const ubicacionIcon = L.divIcon({
+                    className: 'ubicacion-actual',
+                    html: '<div style="color: #d62027; font-size: 24px;"><i class="fa fa-location-dot"></i></div>'
+                });
+
                 if (marker) {
-                    marker.setLatLng(latLng);
-                } else {
-                    marker = L.marker(latLng).addTo(map);
+                    map.removeLayer(marker);
                 }
 
-                marker.bindPopup('Tu ubicación actual').openPopup();
+                marker = L.marker(latLng, { icon: ubicacionIcon }).addTo(map);
                 map.setView(latLng, 16);
 
                 // Realizar búsqueda inversa para obtener la dirección
@@ -219,13 +254,22 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.display_name) {
+                            currentLocation.address = data.display_name;
                             document.getElementById('direccion').value = data.display_name;
-                            marker.bindPopup(`Ubicación: ${data.display_name}`).openPopup();
+                            marker.bindPopup(`Tu ubicación actual:<br>${data.display_name}`).openPopup();
                         }
+                        actualizarBotonSiguiente(true);
                     })
-                    .catch(error => console.error('Error en búsqueda inversa:', error));
+                    .catch(error => {
+                        console.error('Error en búsqueda inversa:', error);
+                        actualizarBotonSiguiente(true);
+                    })
+                    .finally(() => {
+                        mostrarLoading(false);
+                    });
             },
             function (error) {
+                mostrarLoading(false);
                 let mensaje = 'Error al obtener la ubicación: ';
                 switch (error.code) {
                     case error.PERMISSION_DENIED:
@@ -241,7 +285,17 @@
                         mensaje += 'Error desconocido.';
                 }
                 alert(mensaje);
+                actualizarBotonSiguiente(false);
             }
         );
+    }
+
+    function continuarPedido() {
+        if (!currentLocation) {
+            alert('Por favor, seleccione una ubicación de entrega.');
+            return;
+        }
+
+        window.location.href = `/Checkout/Pago`;
     }
 </script>
