@@ -19,7 +19,6 @@
                     </div>
 
                     <form id="checkoutForm">
-                        <!-- Forma de entrega -->
                         <div class="mb-4">
                             <label class="form-label">Forma de entrega: <span
                                     class="text-danger">Delivery</span></label>
@@ -32,7 +31,6 @@
                             </div>
                         </div>
 
-                        <!-- Datos personales -->
                         <div class="mb-4">
                             <label class="form-label">Datos personales:</label>
                             <input type="text" class="form-control mb-2" placeholder="Nombres *" required>
@@ -40,7 +38,6 @@
                             <input type="tel" class="form-control" placeholder="Número de Teléfono *" required>
                         </div>
 
-                        <!-- Tipo de Documento -->
                         <div class="mb-4">
                             <label class="form-label">Tipo de Documento</label>
                             <select class="form-select mb-2">
@@ -72,7 +69,6 @@
                             </div>
                         </div>
 
-                        <!-- Tipo de Comprobante -->
                         <div class="mb-4">
                             <label class="form-label">Tipo de Comprobante:</label>
                             <div class="d-flex gap-4">
@@ -92,7 +88,6 @@
                             </div>
                         </div>
 
-                        <!-- Términos y condiciones -->
                         <div class="mb-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="terminos" required>
@@ -119,7 +114,6 @@
                 <div class="card-body">
                     <h5 class="card-title">RESUMEN DE TU COMPRA</h5>
                     <div class="mt-4">
-                        <!-- Producto -->
                         <div class="d-flex gap-3 mb-3">
                             <img src="/images/producto.jpg" alt="Promo Extrema" width="60" height="60"
                                 class="rounded object-fit-cover">
@@ -130,7 +124,6 @@
                             </div>
                         </div>
 
-                        <!-- Precio -->
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div>
                                 <span class="h5 mb-0">S/. 19.90</span>
@@ -138,7 +131,6 @@
                             </div>
                         </div>
 
-                        <!-- Cupón de descuento -->
                         <div class="mb-4">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Ingresa tu cupón">
@@ -146,7 +138,6 @@
                             </div>
                         </div>
 
-                        <!-- Botón finalizar compra -->
                         <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal"
                             data-bs-target="#paymentModal">
                             FINALIZAR COMPRA
@@ -209,7 +200,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Validación del formulario
         const form = document.getElementById('checkoutForm');
         const finalizarBtn = document.querySelector('.btn-danger.w-100');
 
@@ -233,7 +223,6 @@
         // Habilitar/deshabilitar campos según el tipo de comprobante
         const facturaRadio = document.getElementById('factura');
         facturaRadio.addEventListener('change', function () {
-            // Aquí puedes agregar campos adicionales para factura
         });
     });
 </script>
