@@ -1,0 +1,66 @@
+.card {
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.form-control,
+.form-select {
+    border-radius: 5px;
+    padding: 0.6rem 1rem;
+}
+
+.btn-danger {
+    background-color: #d62027;
+    border-color: #d62027;
+}
+
+.btn-danger:hover {
+    background-color: #c41e24;
+    border-color: #c41e24;
+}
+
+.text-danger {
+    color: #d62027 !important;
+}
+
+.form-check-input:checked {
+    background-color: #d62027;
+    border-color: #d62027;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+
+    .col-md-8,
+    .col-md-4 {
+        margin-bottom: 2rem;
+    }
+}
+
+
+/* Estilos para el Modal */
+.modal-header {
+    background-color: #d62027;
+    color: white;
+    font-weight: bold;
+    justify-content: center;
+}
+
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-footer .btn-primary {
+    background-color: #d62027;
+    /* Color rojo */
+    border: none;
+    font-size: 18px;
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: #d62027;
+}

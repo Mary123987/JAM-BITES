@@ -17,7 +17,7 @@ namespace JAM_BITES.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Pago()
         {
             return View();
         }
