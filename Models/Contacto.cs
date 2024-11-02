@@ -11,5 +11,7 @@ namespace JAM_BITES.Models
         public string? Email { get; set; }
         public string? Telefono { get; set; }
         public string? Mensaje { get; set; }
+
+        public string? Categoria { get; set; }
     }
 }
