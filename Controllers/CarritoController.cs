@@ -39,7 +39,6 @@ namespace JAM_BITES.Controllers
 
         public async Task<IActionResult> Add(long? id)
         {
-            //obtengo el carrito de memoria
             List<Carrito> carrito = Helper.SessionExtensions.Get<List<Carrito>>(HttpContext.Session, "carritoSesion");
             if (carrito == null)
             {
@@ -54,10 +53,8 @@ namespace JAM_BITES.Controllers
 
             carrito.Add(itemCarrito);
 
-            //seteo el carrito en memoria
-
             Helper.SessionExtensions.Set<List<Carrito>>(HttpContext.Session, "carritoSesion", carrito);
-            TempData["Message"] = "Se Agrego al carrito";
+            TempData["Message"] = "Se agrego un producto al carrito";
             _logger.LogInformation("Se agrego un producto al carrito");
             return RedirectToAction("Index", "Carrito");
         }
@@ -69,12 +66,11 @@ namespace JAM_BITES.Controllers
             List<Carrito> carrito = Helper.SessionExtensions.Get<List<Carrito>>(HttpContext.Session, "carritoSesion");
             if (carrito != null && id.HasValue)
             {
-                // Encuentra el producto en el carrito
                 var item = carrito.FirstOrDefault(c => c.Producto.Id == id);
                 if (item != null)
                 {
                     // Actualiza la cantidad del producto
-                    item.Cantidad = cantidad > 0 ? cantidad : 1; // Asegura que la cantidad no sea menor a 1
+                    item.Cantidad = cantidad > 0 ? cantidad : 1;
                 }
 
                 // Actualiza el carrito en la sesión
@@ -96,8 +92,6 @@ namespace JAM_BITES.Controllers
                 {
                     carrito.Remove(item);
                 }
-
-                // Actualiza el carrito en la sesión
                 Helper.SessionExtensions.Set<List<Carrito>>(HttpContext.Session, "carritoSesion", carrito);
             }
 
