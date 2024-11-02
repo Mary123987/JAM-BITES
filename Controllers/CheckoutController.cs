@@ -16,13 +16,13 @@ namespace JAM_BITES.Controllers
         {
             _logger = logger;
         }
-
-        public IActionResult Pago()
+        
+        public IActionResult Recojo()
         {
             return View();
         }
 
-        public IActionResult Recojo()
+        public IActionResult Pago()
         {
             return View();
         }
