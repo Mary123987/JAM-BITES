@@ -1,3 +1,4 @@
+@model JAM_BITES.Models.Pago
 @{
     ViewData["Title"] = "Checkout";
 }
@@ -139,7 +140,7 @@
                         </div>
 
                         <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal"
-                            data-bs-target="#paymentModal">
+                            data-bs-target="#pagoModal">
                             FINALIZAR COMPRA
                         </button>
 
@@ -147,54 +148,73 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal de Pago -->
-        <div id="paymentModal" class="modal fade" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+        <!-- Modal Tarjeta -->
+        <div class="modal fade" id="pagoModal" tabindex="-1" aria-labelledby="pagoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="paymentModalLabel">JAM BITES</h5>
+                        <h5 class="modal-title" id="pagoModalLabel">Pago</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="paymentForm">
-                            <div class="mb-3">
-                                <label for="cardNumber" class="form-label">Número de tarjeta</label>
-                                <input type="text" class="form-control" id="cardNumber"
-                                    placeholder="•••• •••• •••• ••••" required>
-                            </div>
-                            <div class="d-flex gap-2">
-                                <div class="mb-3 flex-fill">
-                                    <label for="expiryDate" class="form-label">Mes / Año</label>
-                                    <input type="text" class="form-control" id="expiryDate" placeholder="MM / AA"
-                                        required>
+                        <form asp-controller="Checkout" asp-action="Pagar">
+                            <div class="form-group row mb-3">
+                                <div class="col-sm-4">
+                                    <label asp-for="NombreTarjeta" class="control-label">Nombre del Titular</label>
                                 </div>
-                                <div class="mb-3 flex-fill">
-                                    <label for="cvv" class="form-label">CVV</label>
-                                    <input type="text" class="form-control" id="cvv" placeholder="•••" required>
+                                <div class="col-sm-8">
+                                    <input asp-for="NombreTarjeta" class="form-control" />
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="firstName" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="firstName" required>
+
+                            <div class="form-group row mb-3">
+                                <div class="col-sm-4">
+                                    <label asp-for="NumeroTarjeta" class="control-label">Número de Tarjeta</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input asp-for="NumeroTarjeta" class="form-control"
+                                        data-inputmask="'mask': '9999-9999-9999-9999'" />
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="lastName" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="lastName" required>
+
+                            <div class="form-group row mb-3">
+                                <div class="col-sm-4">
+                                    <label asp-for="DueDateYYMM" class="control-label">Fecha de Vencimiento</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input asp-for="DueDateYYMM" class="form-control"
+                                        data-inputmask="'mask': '99/99', 'placeholder': 'yy/mm'" />
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" required>
+
+                            <div class="form-group row mb-3">
+                                <div class="col-sm-4">
+                                    <label asp-for="Cvv" class="control-label">CVV</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input asp-for="Cvv" class="form-control"
+                                        data-inputmask="'mask': '999', 'placeholder': '999'" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <div class="col-sm-4">
+                                    <label asp-for="MontoTotal" class="control-label">Monto Total</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="form-control-static">S/. @Model.MontoTotal</p>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Pagar</button>
                             </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary w-100">PAGAR</button>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 

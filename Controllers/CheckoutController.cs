@@ -28,6 +28,10 @@ namespace JAM_BITES.Controllers
         {
             return View();
         }
+        public IActionResult Confirmacion()
+        {
+            return View();
+        }
         public IActionResult Create()
         {
             var carrito = Helper.SessionExtensions.Get<List<Carrito>>(HttpContext.Session, "carritoSesion");
@@ -91,7 +95,7 @@ namespace JAM_BITES.Controllers
             _context.SaveChanges();
 
             TempData["Message"] = "El pago se ha registrado";
-            return RedirectToAction("Index", "Catalogo");
+            return View("Confirmacion");
         }
     }
 }
