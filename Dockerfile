@@ -12,6 +12,11 @@ WORKDIR /app
 COPY --from=build-env /app/out .
 
 ENV ASPNETCORE_ENVIRONMENT Development 
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+
+
 
 #CAMBIAR AQUI EL NOMBRE DEL APLICATIVO
 #nombre de tu app busca en bin\Release**\netcore5.0\plantitas.exe
