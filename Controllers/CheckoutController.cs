@@ -48,12 +48,6 @@ namespace JAM_BITES.Controllers
             return View(pago);
         }
 
-        /*public IActionResult Create(Decimal monto)
-        {
-            Pago pago = new Pago();
-            pago.MontoTotal = monto;
-            return View(pago);
-        }*/
 
         [HttpPost]
         public IActionResult Pagar(Pago pago)
