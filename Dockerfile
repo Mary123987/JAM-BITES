@@ -11,6 +11,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
+ENV ASPNETCORE_ENVIRONMENT Development 
+
 #CAMBIAR AQUI EL NOMBRE DEL APLICATIVO
 #nombre de tu app busca en bin\Release**\netcore5.0\plantitas.exe
 ENV APP_NET_CORE JAM-BITES.dll 
