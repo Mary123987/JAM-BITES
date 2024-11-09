@@ -82,13 +82,10 @@ namespace JAM_BITES.Controllers
 
         public IActionResult ListMenu()
         {
-            // Lista de categorias
             var miscategoria = from o in _context.DataCategoria select o;
 
-            // Lista de productos
             var misproducto = from o in _context.DataProducto select o;
 
-            // Crear el ViewModel combinado
             var viewModel = new CategoriaProductoViewModel
             {
                 ListCategoria = miscategoria,
