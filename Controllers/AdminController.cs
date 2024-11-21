@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using JAM_BITES.Models;
 using JAM_BITES.ViewModel;
 using JAM_BITES.Data;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace JAM_BITES.Controllers
@@ -124,6 +125,73 @@ namespace JAM_BITES.Controllers
         public IActionResult Redes()
         {
             return View();
+        }
+
+        // Lista todos los pedidos
+        public async Task<IActionResult> ListPedido()
+        {
+            var pedidos = await _context.DataPedido
+                .Include(p => p.pago)
+                .OrderByDescending(p => p.pago.NombreTarjeta)
+                .OrderByDescending(p => p.pago.PaymentDate)
+                .ToListAsync();
+
+            return View(pedidos);
+        }
+
+        // Actualizar el estado de un pedido
+        [HttpPost]
+        public async Task<IActionResult> ActualizarEstado(int id, string nuevoEstado)
+        {
+            var pedido = await _context.DataPedido.FindAsync(id);
+
+            if (pedido == null)
+            {
+                return NotFound();
+            }
+
+            pedido.Status = nuevoEstado;
+            _context.Update(pedido);
+            await _context.SaveChangesAsync();
+
+            TempData["Message"] = "Estado del pedido actualizado correctamente";
+            return RedirectToAction(nameof(ListPedido));
+        }
+
+        // Filtrar pedidos por estado
+        public async Task<IActionResult> FiltrarPedidos(string estado)
+        {
+            var pedidos = await _context.DataPedido
+                .Include(p => p.pago)
+                .Where(p => string.IsNullOrEmpty(estado) || p.Status == estado)
+                .OrderByDescending(p => p.pago.PaymentDate)
+                .ToListAsync();
+
+            return View("ListPedido", pedidos);
+        }
+
+        // Buscar pedidos por fecha
+        public async Task<IActionResult> BuscarPorFecha(DateTime? fechaInicio, DateTime? fechaFin)
+        {
+            var query = _context.DataPedido
+                .Include(p => p.pago)
+                .AsQueryable();
+
+            if (fechaInicio.HasValue)
+            {
+                query = query.Where(p => p.pago.PaymentDate >= fechaInicio.Value);
+            }
+
+            if (fechaFin.HasValue)
+            {
+                query = query.Where(p => p.pago.PaymentDate <= fechaFin.Value);
+            }
+
+            var pedidos = await query
+                .OrderByDescending(p => p.pago.PaymentDate)
+                .ToListAsync();
+
+            return View("ListPedido", pedidos);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
