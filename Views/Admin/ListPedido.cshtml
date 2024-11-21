@@ -113,9 +113,9 @@
 
                     @if (TempData["Message"] != null)
                     {
-                        <div class="alert alert-success">
+                            <div class="alert alert-success">
                             @TempData["Message"]
-                        </div>
+                            </div>
                     }
 
                     <div class="table-responsive">
@@ -133,52 +133,52 @@
                             <tbody>
                                 @foreach (var pedido in Model)
                                 {
-                                    <tr>
-                                        <td>@pedido.ID</td>
-                                        <td>@pedido.pago.NombreTarjeta</td>
-                                        <td>@pedido.pago.PaymentDate.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
-                                        <td>
-                                            <span class="badge @(pedido.Status == "PENDIENTE" ? "bg-warning" : 
+                                        <tr>
+                                            <td>@pedido.ID</td>
+                                            <td>@pedido.pago.NombreTarjeta</td>
+                                            <td>@pedido.pago.PaymentDate.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>
+                                                <span class="badge @(pedido.Status == "PENDIENTE" ? "bg-warning" : 
                                                pedido.Status == "PROCESADO" ? "bg-info" : "bg-success")">
                                                 @pedido.Status
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <!--<a asp-action="DetallePedido" asp-route-id="@pedido.ID"
-                                                    class="btn btn-sm btn-info">
-                                                    Detalles
-                                                </a>-->
-                                                <button type="button" class="btn btn-sm btn-primary dropdown-toggle"
-                                                    data-bs-toggle="dropdown">
-                                                    Cambiar Estado
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li>
-                                                        <form asp-action="ActualizarEstado" method="post">
-                                                            <input type="hidden" name="id" value="@pedido.ID" />
-                                                            <input type="hidden" name="nuevoEstado" value="PENDIENTE" />
-                                                            <button type="submit" class="dropdown-item">Pendiente</button>
-                                                        </form>
-                                                    </li>
-                                                    <li>
-                                                        <form asp-action="ActualizarEstado" method="post">
-                                                            <input type="hidden" name="id" value="@pedido.ID" />
-                                                            <input type="hidden" name="nuevoEstado" value="PROCESADO" />
-                                                            <button type="submit" class="dropdown-item">Procesado</button>
-                                                        </form>
-                                                    </li>
-                                                    <li>
-                                                        <form asp-action="ActualizarEstado" method="post">
-                                                            <input type="hidden" name="id" value="@pedido.ID" />
-                                                            <input type="hidden" name="nuevoEstado" value="ENTREGADO" />
-                                                            <button type="submit" class="dropdown-item">Entregado</button>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <!--<a asp-action="DetallePedido" asp-route-id="@pedido.ID"
+                                                        class="btn btn-sm btn-info">
+                                                        Detalles
+                                                    </a>-->
+                                                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle"
+                                                        data-bs-toggle="dropdown">
+                                                        Cambiar Estado
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <form asp-action="ActualizarEstado" method="post">
+                                                                <input type="hidden" name="id" value="@pedido.ID" />
+                                                                <input type="hidden" name="nuevoEstado" value="PENDIENTE" />
+                                                                <button type="submit" class="dropdown-item">Pendiente</button>
+                                                            </form>
+                                                        </li>
+                                                        <li>
+                                                            <form asp-action="ActualizarEstado" method="post">
+                                                                <input type="hidden" name="id" value="@pedido.ID" />
+                                                                <input type="hidden" name="nuevoEstado" value="PROCESADO" />
+                                                                <button type="submit" class="dropdown-item">Procesado</button>
+                                                            </form>
+                                                        </li>
+                                                        <li>
+                                                            <form asp-action="ActualizarEstado" method="post">
+                                                                <input type="hidden" name="id" value="@pedido.ID" />
+                                                                <input type="hidden" name="nuevoEstado" value="ENTREGADO" />
+                                                                <button type="submit" class="dropdown-item">Entregado</button>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
                                 }
                             </tbody>
                         </table>
