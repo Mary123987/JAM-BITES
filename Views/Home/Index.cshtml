@@ -75,6 +75,30 @@
             font-weight: bold;
         }
 
+        html, body {
+            height: 100%; /* Ocupa toda la altura de la ventana */
+            margin: 0; /* Elimina márgenes predeterminados */
+            display: flex;
+            flex-direction: column; /* Organiza los elementos verticalmente */
+        }
+
+        main {
+            flex: 1; /* Expande el contenido principal para llenar el espacio disponible */
+        }
+
+        .footer {
+            background-color: #d62027;
+            text-align: left;
+            font-weight: bold;
+            font-size: 1em;
+            padding: 20px;
+            color: white;
+            width: 100%; /* Asegura que el footer ocupe todo el ancho */
+            border-top: 1px solid white;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -160,6 +184,7 @@
             </div>
         </section>
 
+        
     </div>
 
     <!-- Scripts de Bootstrap -->

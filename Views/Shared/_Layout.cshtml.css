@@ -39,10 +39,23 @@ button.accept-policy {
   line-height: inherit;
 }
 
+html, body {
+  height: 100%; /* Ocupa toda la ventana */
+  margin: 0; /* Elimina márgenes predeterminados */
+  display: flex;
+  flex-direction: column; /* Organiza elementos en una columna */
+}
+
+main {
+  flex: 1; /* Expande el contenido principal para llenar el espacio */
+}
+
 .footer {
-  position: absolute;
+  position: relative; /* Asegúrate de que no esté fuera del flujo */
   bottom: 0;
   width: 100%;
-  white-space: nowrap;
+  background-color: #d62027;
+  color: white;
   line-height: 60px;
+  text-align: center;
 }
