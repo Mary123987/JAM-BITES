@@ -1,4 +1,4 @@
-@model JAM_BITES.ViewModel.CuentaViewModel 
+@model JAM_BITES.ViewModel.CuentaViewModel
 
 @{
     ViewData["Title"] = "Home Page";
@@ -6,133 +6,129 @@
 
 <style>
     * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+    }
 
-body {
-    background-color: #f8f9fa;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 100vh;
-}
+    body {
+        background-color: #f8f9fa;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100vh;
+    }
 
-.main-content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px 0;
-}
+    .main-content {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 0;
+    }
 
-.login-container {
-    background-color: #ffffff;
-    border: 1px solid #dee2e6;
-    border-radius: 15px;
-    padding: 40px;
-    width: 500px; /* Contenedor más ancho */
-    text-align: center;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    .login-container {
+        background-color: #ffffff;
+        border: 1px solid #dee2e6;
+        border-radius: 15px;
+        padding: 40px;
+        width: 500px;
+        text-align: center;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-.login-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
+    .title-section {
+        background-color: #dc3545; /* Rojo oscuro */
+        padding: 20px;
+        color: #ffffff;
+        border-radius: 10px 10px 0 0;
+        font-size: 1.8em;
+        margin-bottom: 25px;
+    }
 
-.title-section {
-    background-color: #dc3545; /* Rojo oscuro */
-    padding: 20px;
-    color: #ffffff;
-    border-radius: 10px 10px 0 0;
-    font-size: 1.8em;
-    margin-bottom: 25px;
-}
+    .title-section h2 {
+        margin: 0;
+    }
 
-.title-section h2 {
-    margin: 0;
-}
+    .login-container p {
+        margin: 15px 0;
+        color: #495057;
+    }
 
-.login-container p {
-    margin: 15px 0;
-    color: #495057;
-}
+    form input {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin: 15px 0;
+        border: 1px solid #ced4da;
+        border-radius: 10px;
+        font-size: 1em;
+    }
 
-form input {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin: 15px 0;
-    border: 1px solid #ced4da;
-    border-radius: 10px;
-    font-size: 1em;
-}
+    .btn-common {
+        padding: 15px; /* Altura uniforme */
+        width: 100%; /* Ancho uniforme */
+        border: none;
+        border-radius: 10px;
+        font-size: 1.2em; /* Tamaño del texto */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        color: white;
+    }
 
-.btn-login {
-    background-color: #eba728; /* Amarillo */
-    color: white;
-    padding: 15px;
-    width: 100%;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 20px 0;
-    font-size: 1.2em;
-    transition: background-color 0.3s ease;
-}
+    .btn-create-account {
+        background-color: #dc3545; /* Rojo oscuro */
+    }
 
-.btn-login:hover {
-    background-color: #e24b0f; /* Color más oscuro al pasar el mouse */
-}
+    .btn-create-account:hover {
+        background-color: #b52a37;
+    }
 
-.create-account {
-    display: block;
-    color: #007bff; /* Azul */
-    margin: 20px 0;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1em;
-}
+    .btn-existing-account {
+        background-color: #eba728; /* Amarillo naranjoso */
+        margin-top: 15px;
+    }
 
-.create-account:hover {
-    text-decoration: underline;
-}
+    .btn-existing-account:hover {
+        background-color: #e5a00b;
+    }
 
-.social-login-text {
-    margin-top: 25px;
-    font-size: 1.1em;
-    color: #495057;
-}
+    .error-message {
+        color: red;
+        font-size: 1em;
+        margin-top: 10px;
+    }
 
-.social-buttons button {
-    padding: 15px;
-    width: 100%;
-    border: none;
-    border-radius: 10px;
-    margin: 10px 0;
-    cursor: pointer;
-    font-size: 1.2em;
-    transition: background-color 0.3s ease;
-}
+    .success-message {
+        color: green;
+        font-size: 1em;
+        margin-top: 10px;
+    }
 
-.social-buttons button:hover {
-    opacity: 0.85;
-}
+    
+    html, body {
+        height: 100%; 
+        margin: 0; 
+        display: flex;
+        flex-direction: column; 
+    }
 
-.btn-google {
-    background-color: #d67167;
-    color: white;
-}
+    main {
+        flex: 1; 
+    }
 
-.btn-facebook {
-    background-color: #748ab8;
-    color: white;
-}
-
+    .footer {
+        background-color: #d62027;
+        text-align: left;
+        font-weight: bold;
+        font-size: 1em;
+        padding: 20px;
+        color: white;
+        width: 100%; 
+        border-top: 1px solid white;
+    }
 </style>
 
 <div class="main-content">
@@ -141,23 +137,25 @@ form input {
             <h2>Crear Cuenta JAM</h2>
         </div>
         <p>¡Completa el formulario para crear tu cuenta!</p>
-        
+
         <form asp-controller="Register" asp-action="CrearCuenta" method="post">
             <input asp-for="FormCuenta.Email" type="email" placeholder="Correo Electrónico" required>
             <input asp-for="FormCuenta.Password" type="password" placeholder="Contraseña" required>
-            <button type="submit" class="btn-login">Crear Cuenta</button>
+            <button type="submit" class="btn-common btn-create-account">Crear Cuenta</button>
         </form>
-        
-        <form action="@Url.Action("Index","Login")" method="get"><button>Ya tengo una cuenta</button></form>
-        
+
+        <form action="@Url.Action("Index", "Login")" method="get">
+            <button type="submit" class="btn-common btn-existing-account">Ya tengo una cuenta</button>
+        </form>
+
         @if (ViewBag.ErrorMessage != null)
         {
-            <p style="color: red;">@ViewBag.ErrorMessage</p>
+            <p class="error-message">@ViewBag.ErrorMessage</p>
         }
 
         @if (ViewBag.SuccessMessage != null)
         {
-            <p style="color: green;">@ViewBag.SuccessMessage</p>
+            <p class="success-message">@ViewBag.SuccessMessage</p>
         }
     </div>
 </div>
