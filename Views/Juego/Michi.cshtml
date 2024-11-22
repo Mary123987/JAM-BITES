@@ -10,9 +10,39 @@
     <link rel="stylesheet" href="~/css/michi.css" />
     <script src="~/js/michi.js" defer></script>
 </head>
+<br>
+<br>
 <body onload="inicializar();">
     <h1 class="text-center mb-4" style="color: #d62027;">@ViewData["Title"]</h1>
     <table id="grilla"></table>
     <div id="ganador"></div>
 </body>
+<br>
+
 </html>
+
+ <style>
+      
+        html, body {
+            height: 100%; 
+            margin: 0; 
+            display: flex;
+            flex-direction: column; 
+        }
+
+        main {
+            flex: 1; 
+        }
+
+        .footer {
+            background-color: #d62027;
+            text-align: left;
+            font-weight: bold;
+            font-size: 1em;
+            padding: 20px;
+            color: white;
+            width: 100%; 
+            border-top: 1px solid white;
+        }
+
+    </style>
