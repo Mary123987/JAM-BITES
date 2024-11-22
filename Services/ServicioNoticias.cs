@@ -46,7 +46,7 @@ namespace JAM_BITES.Services
             }
 
             var request = new HttpRequestMessage(HttpMethod.Get, "https://google-news13.p.rapidapi.com/entertainment?lr=es-PE");
-            request.Headers.Add("X-RapidAPI-Key", "a71e17a7d3msheacbb6c349b32b9p16d102jsn992796c45650");
+            request.Headers.Add("X-RapidAPI-Key", "a4b2184298msh487b1ac957eeeedp19984djsnfec86cd175bf");
             request.Headers.Add("X-RapidAPI-Host", "google-news13.p.rapidapi.com");
 
             var response = await _httpClient.SendAsync(request);
