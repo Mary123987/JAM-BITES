@@ -1,40 +1,254 @@
 @model JAM_BITES.Models.RespuestaNoticias
 
-<h1>Noticias de Entretenimiento</h1>
+<div class="news-container">
+    <h1>Noticias de Entretenimiento</h1>
 
-@if (Model?.Items != null && Model.Items.Count > 0)
-{
-    <ul>
-        @foreach (var item in Model.Items)
-        {
-            <li>
-                <h2>@item.Title</h2>
-                <p>@item.Snippet</p>
-                <p><strong>Publicado por:</strong> @item.Publisher</p>
-                <p><strong>Fecha:</strong> @item.Timestamp.ToString("g")</p>
-                <a href="@item.NewsUrl" target="_blank">Leer más</a>
-                <img src="@item.Images?.Thumbnail" alt="Thumbnail" />
+    @if (Model?.Items != null && Model.Items.Count > 0)
+    {
+        <ul class="news-list">
+            @foreach (var item in Model.Items)
+            {
+                <li class="news-item">
+                    <div class="news-header">
+                        <h2>@item.Title</h2>
+                        <p class="publisher">Publicado por: <span>@item.Publisher</span></p>
+                        <p class="date">Fecha: <span>@DateTimeOffset.FromUnixTimeMilliseconds(item.Timestamp).DateTime.ToString("dd/MM/yyyy HH:mm")</span></p>
+                    </div>
 
-                @if (item.HasSubnews && item.Subnews != null)
-                {
-                    <h3>Subnoticias:</h3>
-                    <ul>
-                        @foreach (var subnews in item.Subnews)
-                        {
-                            <li>
-                                <h4>@subnews.Title</h4>
-                                <p>@subnews.Snippet</p>
-                                <a href="@subnews.NewsUrl" target="_blank">Leer más</a>
-                                <img src="@subnews.Images?.Thumbnail" alt="Thumbnail" />
-                            </li>
-                        }
-                    </ul>
-                }
-            </li>
-        }
-    </ul>
-}
-else
-{
-    <p>No hay noticias para mostrar en este momento.</p>
-}
+                    <p class="snippet">@item.Snippet</p>
+
+                    <!-- Enlace para leer más -->
+                    <a href="@item.NewsUrl" target="_blank" class="read-more">Leer más</a>
+
+                    <!-- Imagen principal con fallback -->
+                    @if (item.Images != null)
+                    {
+                        <img src="@item.Images.ThumbnailProxied ?? item.Images.Thumbnail" 
+                             alt="Imagen principal" 
+                             class="news-image" 
+                             onerror="this.onerror=null; this.src='/images/default-image.jpg';" />
+                    }
+                    else
+                    {
+                        <p class="no-image">No hay imagen disponible.</p>
+                    }
+
+                    <!-- Subnoticias -->
+                    @if (item.HasSubnews && item.Subnews != null && item.Subnews.Count > 0)
+                    {
+                        <div class="subnews">
+                            <h3>Subnoticias:</h3>
+                            <ul>
+                                @foreach (var subnews in item.Subnews)
+                                {
+                                    <li class="subnews-item">
+                                        <h4>@subnews.Title</h4>
+                                        <p>@subnews.Snippet</p>
+                                        <a href="@subnews.NewsUrl" target="_blank" class="read-more">Leer más</a>
+
+                                        <!-- Imagen de subnoticia con fallback -->
+                                        @if (subnews.Images != null)
+                                        {
+                                            <img src="@subnews.Images.ThumbnailProxied ?? subnews.Images.Thumbnail" 
+                                                 alt="Imagen de subnoticia" 
+                                                 class="subnews-image" 
+                                                 onerror="this.onerror=null; this.src='/images/default-image.jpg';" />
+                                        }
+                                        else
+                                        {
+                                            <p class="no-image">No hay imagen disponible para esta subnoticia.</p>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No hay noticias para mostrar en este momento.</p>
+    }
+</div>
+
+<style>
+
+    .footer {
+      background-color:#d62027;
+      text-align:left;
+      font-weight:bold;
+      font-size:1em;
+      padding:20px;
+      color:white;
+      width:100%; 
+      border-top:1px solid white;
+   }
+   
+   html, body {
+      height:100%; 
+      margin:0; 
+      display:flex; 
+      flex-direction:column; 
+   }
+
+   main {
+      flex:1; 
+   }
+
+    /* Contenedor principal de noticias */
+    .news-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: left;
+        margin-top: 30px;
+        margin-bottom: 40px;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+        color: #2C3E50;
+        font-size: 32px;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+
+    /* Estilos de la lista de noticias */
+    .news-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .news-item {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        padding: 20px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .news-item:hover {
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        transform: translateY(-5px);
+    }
+
+    /* Estilos para el encabezado de cada noticia */
+    .news-header h2 {
+        color: #34495E;
+        font-size: 26px;
+        margin-bottom: 10px;
+    }
+
+    .publisher,
+    .date {
+        color: #7F8C8D;
+        font-size: 14px;
+    }
+
+    .publisher span,
+    .date span {
+        color: #95A5A6;
+        font-weight: normal;
+    }
+
+    .snippet {
+        font-size: 16px;
+        line-height: 1.6;
+        margin: 15px 0;
+        color: #7F8C8D;
+    }
+
+    /* Estilos del enlace "Leer más" */
+    .read-more {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #2980B9;
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 15px;
+        transition: background-color 0.3s ease;
+    }
+
+    .read-more:hover {
+        background-color: #3498DB;
+    }
+
+    /* Estilo de la imagen principal más grande */
+    .news-image {
+        display: block;
+        width: 100% !important;
+        height: auto !important;
+        max-height: 500px !important;
+        margin: 20px 0 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        transition: transform 0.3s ease !important;
+    }
+
+    .news-image:hover {
+        transform: scale(1.05);
+    }
+
+    .no-image {
+        color: #e74c3c;
+        font-style: italic;
+        font-size: 14px;
+    }
+
+    /* Subnoticias */
+    .subnews {
+        margin-top: 30px;
+        padding-left: 20px;
+    }
+
+    .subnews-item {
+        background: #f9f9f9;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .subnews-item h4 {
+        color: #2C3E50;
+        font-size: 18px;
+    }
+
+    .subnews-item p {
+        font-size: 14px;
+        color: #7F8C8D;
+    }
+
+    .subnews-item .read-more {
+        background-color: #8E44AD;
+        color: white;
+    }
+
+    .subnews-item .read-more:hover {
+        background-color: #9B59B6;
+    }
+
+    /* Imagen de subnoticia más grande */
+    .subnews-image {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 400px; /* Limitar la altura de las subnoticias también */
+        margin-top: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .subnews-image:hover {
+        transform: scale(1.05);
+    }
+</style>

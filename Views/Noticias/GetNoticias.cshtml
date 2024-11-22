@@ -22,13 +22,11 @@
                     <a href="@item.NewsUrl" target="_blank">Leer más</a>
 
                     <!-- Mostrar imagen principal con fallback -->
-                    @if (item.Images != null && !string.IsNullOrEmpty(item.Images.Thumbnail))
+                    @if (item.Images != null)
                     {
-                        <img src="@item.Images.Thumbnail" alt="Imagen principal" onerror="this.onerror=null; this.src='/images/default-image.jpg';" />
-                    }
-                    else if (item.Images != null && !string.IsNullOrEmpty(item.Images.ThumbnailProxied))
-                    {
-                        <img src="@item.Images.ThumbnailProxied" alt="Imagen principal (proxied)" onerror="this.onerror=null; this.src='/images/default-image.jpg';" />
+                        <img src="@item.Images.ThumbnailProxied ?? item.Images.Thumbnail" 
+                             alt="Imagen principal" 
+                             onerror="this.onerror=null; this.src='/images/default-image.jpg';" />
                     }
                     else
                     {
@@ -50,25 +48,15 @@
 
                                         <!-- Mostrar imagen de subnoticia con fallback -->
                                        @if (subnews.Images != null)
-                                            {
-                                                if (!string.IsNullOrEmpty(subnews.Images.Thumbnail))
-                                                {
-                                                    <img src="@subnews.Images.Thumbnail" alt="Imagen de subnoticia" onerror="this.onerror=null; this.src='/images/default-image.jpg';" />
-                                                }
-                                                else if (!string.IsNullOrEmpty(subnews.Images.ThumbnailProxied))
-                                                {
-                                                    <img src="@subnews.Images.ThumbnailProxied" alt="Imagen de subnoticia (proxied)" onerror="this.onerror=null; this.src='/images/default-image.jpg';" />
-                                                }
-                                                else
-                                                {
-                                                    <p>No hay imagen disponible para esta subnoticia.</p>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                <p>No hay imágenes disponibles para esta subnoticia.</p>
-                                            }
-
+                                        {
+                                            <img src="@subnews.Images.ThumbnailProxied ?? subnews.Images.Thumbnail" 
+                                                 alt="Imagen de subnoticia" 
+                                                 onerror="this.onerror=null; this.src='/images/default-image.jpg';" />
+                                        }
+                                        else
+                                        {
+                                            <p>No hay imagen disponible para esta subnoticia.</p>
+                                        }
                                     </li>
                                 }
                             </ul>
