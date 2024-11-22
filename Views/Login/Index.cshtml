@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+
 <style>
     * {
         margin: 0;
@@ -31,9 +32,8 @@
         background-color: #ffffff;
         border: 1px solid #dee2e6;
         border-radius: 15px;
-        padding: 40px;
+        padding: 30px; /* Reducido */
         width: 500px;
-        /* Contenedor más ancho */
         text-align: center;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -46,7 +46,6 @@
 
     .title-section {
         background-color: #dc3545;
-        /* Rojo oscuro */
         padding: 20px;
         color: #ffffff;
         border-radius: 10px 10px 0 0;
@@ -66,74 +65,100 @@
     form input {
         display: block;
         width: 100%;
-        padding: 15px;
-        margin: 15px 0;
+        padding: 10px; /* Reducido */
+        margin: 10px 0; /* Reducido */
         border: 1px solid #ced4da;
         border-radius: 10px;
         font-size: 1em;
     }
 
-    .btn-login {
-        background-color: #eba728;
-        /* Rojo */
-        color: white;
-        padding: 15px;
+    .btn-common {
+        padding: 10px; /* Reducido */
         width: 100%;
         border: none;
         border-radius: 10px;
         cursor: pointer;
-        margin: 20px 0;
-        font-size: 1.2em;
+        margin: 10px 0; /* Reducido */
+        font-size: 1em; /* Ajustado */
         transition: background-color 0.3s ease;
+        color: white;
+    }
+
+    .btn-login {
+        background-color: #dc3545;
     }
 
     .btn-login:hover {
-        background-color: #e24b0f;
+        background-color: #b52a37;
     }
 
-    .create-account {
-        display: block;
-        color: #007bff;
-        /* Azul */
-        margin: 20px 0;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 1.1em;
+    .btn-create-account {
+        background-color: #f4a261;
     }
 
-    .create-account:hover {
-        text-decoration: underline;
+    .btn-create-account:hover {
+        background-color: #e07a3b;
     }
 
     .social-login-text {
-        margin-top: 25px;
+        margin-top: 15px; /* Reducido */
         font-size: 1.1em;
         color: #495057;
     }
 
-    .social-buttons button {
-        padding: 15px;
-        width: 100%;
-        border: none;
-        border-radius: 10px;
-        margin: 10px 0;
-        cursor: pointer;
-        font-size: 1.2em;
-        transition: background-color 0.3s ease;
+    .social-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
     }
 
-    .social-buttons button:hover {
-        opacity: 0.85;
+    .social-buttons button {
+        padding: 10px;
+        width: 48%;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 0.9em;
+        transition: background-color 0.3s ease;
+        color: white;
     }
 
     .btn-google {
-        background-color: #d67167;
-        color: white;
+        background-color: #4fc3f7;
+    }
+
+    .btn-google:hover {
+        background-color: #29b6f6;
     }
 
     .btn-facebook {
-        background-color: #748ab8;
+        background-color: #154360;
+    }
+
+    .btn-facebook:hover {
+        background-color: #0d2a4c;
+    }
+
+    html, body {
+        height: 100%; 
+        margin: 0; 
+        display: flex;
+        flex-direction: column; 
+    }
+
+    main {
+        flex: 1; 
+    }
+
+    .footer {
+        background-color: #d62027;
+        text-align: left;
+        font-weight: bold;
+        font-size: 1em;
+        padding: 20px;
         color: white;
+        width: 100%; 
+        border-top: 1px solid white;
     }
 </style>
 
@@ -159,18 +184,18 @@
                     @ViewBag.Error
                 </div>
             }
-            <button type="submit" class="btn btn-primary btn-block w-100">Ingresar</button>
+            <button type="submit" class="btn-common btn-login">Ingresar</button>
         </form>
 
         <form action="@Url.Action("Index","Register")" method="get">
-            <button>Crear cuenta</button>
+            <button type="submit" class="btn-common btn-create-account">Crear cuenta</button>
         </form>
 
         <p class="social-login-text">Inicia también a través de:</p>
 
         <div class="social-buttons">
-            <button class="btn-google">Inicia con Google</button>
-            <button class="btn-facebook">Inicia con Facebook</button>
+            <button class="btn-google">Google</button>
+            <button class="btn-facebook">Facebook</button>
         </div>
     </div>
 </div>
