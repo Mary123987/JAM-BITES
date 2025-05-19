@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JAM_BITES.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241107233915_MigracionNuevaPostGreSQL")]
-    partial class MigracionNuevaPostGreSQL
+    [Migration("20250519210442_MigracionBase")]
+    partial class MigracionBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
