@@ -1,0 +1,35 @@
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  intent="WELCOME"
+  chat-title="Jamby 🤖"
+  agent-id="e52b562f-3f69-4189-999e-167733a45b9c"
+  language-code="es"
+  chat-icon="/img/jam1.png"
+  chat-title-icon="/img/jam1.png"
+  background-color="#d62027"
+></df-messenger>
+<style>
+  df-messenger {
+    --df-messenger-bot-message: #f7d0d1ce;
+    --df-messenger-button-titlebar-color: #d62027;
+    --df-messenger-button-titlebar-text-color: white;
+    --df-messenger-chat-background-color: white;
+    --df-messenger-input-box-color: white;
+    --df-messenger-input-text-color: white;
+  }
+  df-messenger::part(titlebar) {
+    background: #d62027 !important;
+  }
+  df-messenger .df-messenger-titlebar {
+    background: #d62027 !important;
+  }
+  df-messenger .df-messenger-button {
+    background-color: #f3e4e4 !important;
+    color: white !important;
+  }
+  df-messenger .df-messenger-send-icon {
+    background-color: #d62027 !important;
+    fill: white !important;
+    border-radius: 50% !important;
+}
+  </style>

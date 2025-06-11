@@ -17,8 +17,24 @@
             background-color: #d62027;
         }
         .navbar-brand {
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-weight: 900;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: #fff !important;
+            text-shadow: 1px 1px 8px #b5161e33;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0;
+        }
+        .navbar-brand img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            object-fit: cover;
+            margin-right: 8px;
         }
 
         .navbar-nav .nav-link {
@@ -26,7 +42,7 @@
             font-size: 1.0rem; 
             padding: 10px 15px;
             transition: background-color 0.3s, color 0.3s; 
-        }
+        } 
 
         .navbar-nav .nav-link:hover {
             background-color: #b5161e; 
@@ -51,8 +67,10 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3"
             style="background-color: #d62027;">
             <div class="container-fluid">
-                <a class="navbar-brand mb-0 h1" asp-area="" asp-controller="Home" asp-action="Index"
-                    style="color: #FFFFFF;">JAM BITES</a>
+                 <a class="navbar-brand mb-0 h1" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/jam1.png" alt="Logo JAM BITES" />
+                    JAM BITES
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -115,6 +133,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @await Html.PartialAsync("_ChatbotWidget")
 </body>
 
 </html>
